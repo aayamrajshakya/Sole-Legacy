@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import Footer from "./Components/Footer";
+import { NavBar } from './Components/NavBar/NavBar';
 
 function App() {
   return (
     <div className="App">
-      <div className="App-header">
-        <h1>Sole Legacy &#8482;</h1>
-      </div>
+      <NavBar />
+      <Footer />
     </div>
   );
 }
