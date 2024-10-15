@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./NavBar.css";
-import '@fontsource/inter';
 
 export const NavBar = () => {
   return (
