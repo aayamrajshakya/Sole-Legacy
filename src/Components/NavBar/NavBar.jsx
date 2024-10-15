@@ -1,6 +1,6 @@
 import React from 'react'
 import "./NavBar.css";
-import logo from '../Assets/banner_logo.png';
+import '@fontsource/inter';
 
 export const NavBar = () => {
   return (
