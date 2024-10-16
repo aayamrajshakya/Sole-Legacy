@@ -27,6 +27,12 @@
     height: 1%;
 }
 
+.nav-link{
+  text-decoration: none;
+  margin-top: 30px;
+  color: #000;
+}
+
 .nav-menu{
     display: flex;
     align-items: flex-start;
@@ -37,15 +43,7 @@
     padding: 0;
 }
 
-.nav-menu li{
-    display: flex;
-    flex-direction: column;
-    font-size: 1.2rem;
-    margin-top: 28px;
-    font-weight: 40;
-}
-
-.nav-menu li:hover {
+.nav-link:hover {
     border-color: #06f;
     color: #06f;
     fill: #06f;

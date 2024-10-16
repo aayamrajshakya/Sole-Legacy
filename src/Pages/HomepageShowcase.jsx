@@ -11,7 +11,6 @@ export const HomepageShowcase = (props) => {
         {showcase.map((shoe,i)=>{
           return <Item key={i} id={shoe.id} name={shoe.name} image={shoe.image} price={shoe.price}/>
         })}
-
       </div>
     </div>
   )
