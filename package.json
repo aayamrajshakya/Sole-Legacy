@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
+    "@fontsource/lora": "^5.1.0",
     "@fontsource/moderustic": "^5.1.0",
     "@fontsource/poppins": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
