@@ -1,5 +1,5 @@
 import React from 'react'
-import { men } from "../showcase"
+import { men } from "../shoeInventory"
 import "./Men.css"
 import { Item } from "./Item"
 

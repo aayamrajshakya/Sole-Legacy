@@ -1,6 +1,6 @@
 import React from 'react'
 import './HomepageShowcase.css';
-import showcase from "../showcase";
+import showcase from "../shoeInventory";
 import { Item } from "./Item"
 
 export const HomepageShowcase = (props) => {
