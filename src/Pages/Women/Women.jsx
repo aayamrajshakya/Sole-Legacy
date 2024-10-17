@@ -1,7 +1,7 @@
 import React from 'react'
-import { women } from "../shoeInventory"
+import { women } from "../../shoeInventory"
 import "./Women.css"
-import { Item } from "./Item"
+import { Item } from "../Item/Item"
 
 
 export const Women = (props) => {

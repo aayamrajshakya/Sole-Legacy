@@ -1,7 +1,7 @@
 import React from 'react'
 import './HomepageShowcase.css';
-import showcase from "../shoeInventory";
-import { Item } from "./Item"
+import showcase from "../../shoeInventory";
+import { Item } from "../Item/Item"
 
 export const HomepageShowcase = (props) => {
   return (

@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import Footer from "./Components/Footer/Footer";
 import { NavBar } from './Components/NavBar/NavBar';
-import { Homepage } from './Pages/Homepage';
-import { Men } from './Pages/Men';
-import { Women } from './Pages/Women';
+import { Homepage } from './Pages/Homepage/Homepage';
+import { Men } from './Pages/Men/Men';
+import { Women } from './Pages/Women/Women';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {

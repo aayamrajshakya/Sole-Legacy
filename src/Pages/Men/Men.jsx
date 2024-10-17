@@ -1,7 +1,7 @@
 import React from 'react'
-import { men } from "../shoeInventory"
+import { men } from "../../shoeInventory"
 import "./Men.css"
-import { Item } from "./Item"
+import { Item } from "../Item/Item"
 
 
 export const Men = (props) => {
