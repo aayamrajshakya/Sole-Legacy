@@ -11,10 +11,14 @@ import adidas1 from "./Components/Assets/adidas1.png"
 import nike_f1 from "./Components/Assets/nike_f1.png"
 import nike_f2 from "./Components/Assets/nike_f2.png"
 import nike_f3 from "./Components/Assets/nike_f3.png"
-import on1 from "./Components/Assets/on1.png"
-
+import puma_f1 from "./Components/Assets/Women/puma1.png"
+import puma_f2 from "./Components/Assets/Women/puma2.png"
 import rebook1 from "./Components/Assets/rebook1.png"
 import rebook2 from "./Components/Assets/rebook2.png"
+import rebook_f2 from "./Components/Assets/Women/rebook2.png"
+import nike_f4 from "./Components/Assets/Women/nike_f1.png"
+import nike_f5 from "./Components/Assets/Women/nike_f2.png"
+
 
 let showcase = [
     {
@@ -116,10 +120,35 @@ let women = [
     },
     {
         id:10,
-        name: "ON Cloud 5",
-        image:on1,
-        price: 140,
+        name: "Puma Palermo Moda Xtra",
+        image:puma_f1,
+        price: 100,
     },
+    {
+        id:10,
+        name: "Rebook STEWIE x TEAM Stewie 3",
+        image:puma_f2,
+        price: 120,
+    },
+    {
+        id:10,
+        name: "Rebook Nano X4",
+        image:rebook_f2,
+        price: 112,
+    },
+    {
+        id:10,
+        name: "Nike Air Force 1 Shadow",
+        image:nike_f4,
+        price: 114.97,
+    },
+    {
+        id:10,
+        name: "Nike Free Metcon 6",
+        image:nike_f5,
+        price: 102.97,
+    },
+    
     
 ]
 
