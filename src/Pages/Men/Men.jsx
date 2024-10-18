@@ -3,7 +3,6 @@ import { men } from "../../shoeInventory"
 import "./Men.css"
 import { Item } from "../Item/Item"
 
-
 export const Men = (props) => {
   return (
     <div className="men-shoe">

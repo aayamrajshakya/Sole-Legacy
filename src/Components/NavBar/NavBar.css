@@ -49,47 +49,17 @@
     fill: #06f;
   }
 
-.nav-login-cart button {
+  .nav-icons {
+    display: flex;
     align-items: center;
-    background-color: #fff;
-    border: 2px solid #000;
-    box-sizing: border-box;
-    color: #000;
-    cursor: pointer;
-    display: inline-flex;
-    fill: #000;
-    font-size: 1.2rem;
-    font-weight: 600;
-    height: 40px;
-    width: 10px;
-    justify-content: center;
-    letter-spacing: -.8px;
-    line-height: 24px;
-    min-width: 140px;
-    outline: 0;
-    padding: 0 17px;
-    text-align: center;
     margin-top: 20px;
-    text-decoration: none;
-    transition: all .3s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+    gap: 30px;
   }
   
-  .nav-login-cart button:focus {
-    color: #171e29;
+  .nav-login img,
+  .nav-cart img,
+  .nav-wishlist img {
+    width: 25px;
+    height: auto;
+    display: block;
   }
-  
-  .nav-login-cart button:hover {
-    border-color: #06f;
-    color: #06f;
-    fill: #06f;
-  }
-  
-  .nav-login-cart button:active {
-    border-color: #06f;
-    color: #06f;
-    fill: #06f;
-  }
-

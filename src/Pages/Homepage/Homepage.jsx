@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Homepage.css";
 import { HomepageShowcase } from '../HomepageShowcase/HomepageShowcase'
-import banner from '../../Components/Assets/banner.jpg'
+import banner from '../../Components/Assets/general/banner.jpg'
 export const Homepage = () => {
   return (
     <div className="background">
