@@ -1,3 +1,5 @@
+// https://medium.com/geekculture/how-to-use-react-router-useparams-436851fd5ef6
+
 import React from 'react'
 import "./Women.css"
 import { women } from "../../shoeInventory"
@@ -10,7 +12,7 @@ export const Women = () => {
       <h2>Women's collection</h2>
       <div className="women-catalog">
       {women.map((shoe,i)=>(
-        <Link to={`${shoe.name}`}>
+        <Link to={`${shoe.url}`}>
         <Item key={i} id={shoe.id} name={shoe.name} image={shoe.image} price={shoe.price}/>
         </Link>
         ))}

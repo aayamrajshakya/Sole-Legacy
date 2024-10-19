@@ -2,17 +2,26 @@
 
 import React from 'react'
 import "./IndivShoe.css"
+import { showcase, women, men } from "../../shoeInventory"
 import { useParams } from 'react-router-dom'
 
-export const IndivShoe = (props) => {
+export const IndivShoe = () => {
+    const { url } = useParams();
+    let allShoes = [...women,...men]
   return (
     <div className="item">
-        <div className="image">
-            <img src={props.image}/>
-        </div>
-        <p>Sabbai jutta haru</p>
-        <p>${props.price} / ${props.price}</p>
-
+        {allShoes.filter(shoe => shoe.url === url).map((shoe, index) =>(
+            <div key={index}>
+            <div className="image">
+                <img src = {shoe.image} />
+            </div>
+            <div className="text_info">
+                <p>{shoe.name}</p>
+                <p>${shoe.price}</p>
+            </div>
+            </div>
+                
+        ))}
     </div>
   )
 }
