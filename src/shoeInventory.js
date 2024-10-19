@@ -12,6 +12,7 @@ import men4 from "./Components/Assets/Men/rebook_m1.png"
 import men5 from "./Components/Assets/Men/nike_m3.png"
 import men6 from "./Components/Assets/Men/nike_m4.png"
 import men7 from "./Components/Assets/Men/nike_m5.png"
+import special_nike from "./Components/Assets/Showcase/special_nike.png"
 
 // women items
 import women1 from "./Components/Assets/Women/nike_f1.png"
@@ -116,6 +117,14 @@ let men = [
         description: "The Nike P-6000 draws on the 2006 Nike Air Pegasus, bringing you a mash-up of iconic style that's breathable, comfortable and evocative of that early-2000s vibe.",
         image: men7,
         price: 110,
+    },
+    {
+        id: 13,
+        name: "Nike Air Jordan 1",
+        url: "Nike_Air_Jordan_1",
+        description: "The Air Jordan 1 Mid brings full-court style and premium comfort to an iconic look. Its Air-Sole unit cushions play on the hardwood, while the padded collar gives you a supportive feel.",
+        image: special_nike,
+        price: 125,
     }
 ]
 
@@ -180,8 +189,7 @@ let women = [
         id: 19,
         name: "Nike Air Force 1 Shadow",
         url: "Nike_Air_Force_1_Shadow",
-        // description: "The Nike Air Force 1 Shadow puts a playful twist on a classic b-ball design. Using a layered approach, doubling the branding and exaggerating the midsole, it highlights AF-1 DNA with a bold, new look.",
-        description: "just trying to sell shoes and make money for college",
+        description: "The Nike Air Force 1 Shadow puts a playful twist on a classic b-ball design. Using a layered approach, doubling the branding and exaggerating the midsole, it highlights AF-1 DNA with a bold, new look.",
         image: women8,
         price: 114.97,
     },

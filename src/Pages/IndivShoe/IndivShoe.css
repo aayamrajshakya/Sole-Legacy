@@ -36,3 +36,8 @@
     color: rgb(97, 97, 97);
     line-height: 1.3;  
 }
+
+.special_offer{
+    color: red;
+    font-size: 1.2rem;
+}

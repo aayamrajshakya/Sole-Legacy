@@ -16,7 +16,13 @@ export const IndivShoe = () => {
                 <img src = {shoe.image} />
                 </div>
             <div className="indivShoe_info">
-                <h3>{shoe.name} <div className="price">${shoe.price}</div></h3>
+                {/* The new edition shoe in showcase will get an additional component: old price */}
+                {/* https://codesource.io/blog/how-to-use-ternary-operator-in-react/ */}
+                {/* here, I choose its url as a unique identifier */}
+                
+                <h3>{shoe.name} <div className="special_offer">{shoe.url=="Nike_Air_Jordan_1" ? "Old price: $179" : ""}<div className="price">${shoe.price} </div>
+                </div>
+                </h3>
                 <h3>Description <div className="description">{shoe.description}</div></h3>
             </div>
             </div>
