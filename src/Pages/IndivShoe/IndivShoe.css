@@ -1,0 +1,38 @@
+.main_div {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.indivShoePage {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
+}
+
+.indivShoe_img img {
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+}
+
+.indivShoe_info {
+    flex: 1;
+    text-align: left;
+}
+
+.price{
+    font-size: 1.2rem;
+    font-weight: 150;
+    color: rgb(97, 97, 97);
+}
+
+/* line-height here means the indentation */
+/* https://www.w3schools.com/cssref/pr_dim_line-height.php */
+
+.description{
+    font-size: 1.2rem;
+    font-weight: 150;
+    color: rgb(97, 97, 97);
+    line-height: 1.3;  
+}

@@ -9,19 +9,17 @@ export const IndivShoe = () => {
     const { url } = useParams();
     let allShoes = [...women,...men]
   return (
-    <div className="item">
+    <div className="main_div">
         {allShoes.filter(shoe => shoe.url === url).map((shoe, index) =>(
-            <div key={index}>
-            <div className="image">
+            <div key={index} className="indivShoePage">
+                <div className="indivShoe_img">
                 <img src = {shoe.image} />
+                </div>
+            <div className="indivShoe_info">
+                <h3>{shoe.name} <div className="price">${shoe.price}</div></h3>
+                <h3>Description <div className="description">{shoe.description}</div></h3>
             </div>
-            <div className="text_info">
-                <p>{shoe.name}</p>
-                <p>${shoe.price}</p>
-                <p>{shoe.description}</p>
             </div>
-            </div>
-                
         ))}
     </div>
   )
