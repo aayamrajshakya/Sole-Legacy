@@ -28,14 +28,14 @@ let showcase = [
     {
         id:1,
         name: "Nike Zoom Vomero 5",
-        image:showcase_1,
-        price:109.97,
+        image: showcase_1,
+        price: 109.97,
     },
     {
         id:2,
         name: "New Balance 530",
-        image:showcase_2,
-        price:99.99,
+        image: showcase_2,
+        price: 99.99,
     },
     {
         id:3,
@@ -99,55 +99,55 @@ let men = [
 
 let women = [
     {
-        id:7,
+        id:12,
         name: "Nike TC 7900",
         image: women1,
         price: 90.97,
     },
     {
-        id:8,
+        id:13,
         name: "Reebok x Barbie BB 4000 II",
         image:women2,
         price: 100,
     },
     {
-        id:10,
+        id:14,
         name: "Nike Air Max 270",
         image: women3,
         price: 160,
     },
     {
-        id:10,
+        id:15,
         name: "Nike Pegasus Plus",
         image: women4,
         price: 180,
     },
     {
-        id:10,
+        id:16,
         name: "Puma Palermo Moda Xtra",
         image: women5,
         price: 100,
     },
     {
-        id:10,
+        id:17,
         name: "Puma STEWIE x TEAM Stewie 3",
         image: women6,
         price: 120,
     },
     {
-        id:10,
+        id:18,
         name: "Rebook Nano X4",
         image: women7,
         price: 112,
     },
     {
-        id:10,
+        id:19,
         name: "Nike Air Force 1 Shadow",
         image: women8,
         price: 114.97,
     },
     {
-        id:10,
+        id:20,
         name: "Nike Free Metcon 6",
         image: women9,
         price: 102.97,

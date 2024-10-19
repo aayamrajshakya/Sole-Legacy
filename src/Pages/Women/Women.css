@@ -1,28 +1,41 @@
 .women-shoe {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
+    align-items: flex-start;
     margin-top: 20px;
     gap: 10px;
     width: 100%;
-    padding: 0 40px; /* Add padding to the entire container */
+    padding: 0 40px;
     box-sizing: border-box;
 }
 
 .women-catalog {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Align items to the start (left) */
+    justify-content: flex-start;
     gap: 20px;
     width: 100%;
+    text-decoration: none;
 }
 
+/* "a" here means anchor tag, which Link uses */
+.women-catalog a{
+    text-decoration: none;
+    color: black;
+}
+
+.women-catalog a:hover{
+    color: #06f;
+}
+
+
+/* used gen AI to fix the row problem */
 .women-catalog > * {
     flex: 0 0 calc(25% - 15px);
     max-width: calc(25% - 15px);
 }
 
 h2 {
-    width: 100%; /* Ensure the h2 takes full width */
-    margin-bottom: 20px; /* Add some space below the heading */
+    width: 100%;
+    margin-bottom: 20px;
 }
