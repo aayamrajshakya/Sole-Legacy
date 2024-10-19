@@ -18,6 +18,7 @@ export const IndivShoe = () => {
             <div className="text_info">
                 <p>{shoe.name}</p>
                 <p>${shoe.price}</p>
+                <p>{shoe.description}</p>
             </div>
             </div>
                 
