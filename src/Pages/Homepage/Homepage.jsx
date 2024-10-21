@@ -15,6 +15,7 @@ export const Homepage = () => {
         <div className="button-85">
           <div className="button-text">Buy now!</div>
         </div>
+        <div></div>
         </Link>
         </div>
         <HomepageShowcase />
