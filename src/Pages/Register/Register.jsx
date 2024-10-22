@@ -1,21 +1,23 @@
 // https://www.w3schools.com/react/react_forms.asp
 
 import React from 'react'
-import "./Login.css"
+import "./Register.css"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-export const Login = () => {
+export const Register = () => {
   return (
     <div className="page_header">
       <div className="login_box">
         <div className="storeLogo">
-          <h2>Login</h2>
+          <h2>Register</h2>
         </div>
-      {/* Kevin, your login form goes here      */}
+      {/* Kevin, your registration form goes here      */}
       <input className="text_box" placeholder="E-mail address" id="email" value="" />
+      <input className="text_box" placeholder="Full name" id="fullName" value="" />
+      <input className="text_box" placeholder="Phone number" id="phoneNumber" value="" />
       <input className="text_box" placeholder="Password" id="password" value="" />
       <div className="bottom_text">
-      <Link to ="/register">Create an account</Link>
+      <Link to ="/login">Already have an account?</Link>
       </div>
       
       </div>

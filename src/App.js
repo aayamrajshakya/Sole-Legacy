@@ -6,6 +6,7 @@ import { Homepage } from './Pages/Homepage/Homepage';
 import { Men } from './Pages/Men/Men';
 import { Women } from './Pages/Women/Women';
 import { Login } from './Pages/Login/Login';
+import { Register } from './Pages/Register/Register';
 import { Cart } from './Pages/Cart/Cart';
 import { Wishlist } from './Pages/Wishlist/Wishlist'
 import { IndivShoe } from './Pages/IndivShoe/IndivShoe'
@@ -23,6 +24,7 @@ function App() {
         <Route path='/men' element={<Men/>}/>
         <Route path='/men/:url' element={<IndivShoe/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
       </Routes>

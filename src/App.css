@@ -2,6 +2,7 @@
   text-align: center;
   height: 100vh;
   display: flex;
+  margin: 0;
   flex-direction: column;
 }
 
