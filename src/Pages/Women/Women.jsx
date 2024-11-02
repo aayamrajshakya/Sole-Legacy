@@ -11,11 +11,11 @@ export const Women = () => {
     <div className="women-shoe">
       <h2>Women's collection</h2>
       <div className="women-catalog">
-      {women.map((shoe,i)=>(
-        <Link to={`${shoe.url}`}>
-        <Item key={i} id={shoe.id} name={shoe.name} image={shoe.image} price={shoe.price}/>
+      {women.map((shoe) => (
+        <Link to={`${shoe.url}`} key={shoe.id}> {/* Moved key to Link */}
+        <Item id={shoe.id} name={shoe.name} image={shoe.image} price={shoe.price} />
         </Link>
-        ))}
+      ))}
       </div>
     </div>
   )

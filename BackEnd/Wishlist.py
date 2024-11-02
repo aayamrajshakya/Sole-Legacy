@@ -23,11 +23,7 @@ class Wishlist:
             # will come into play below
 
             # now insert them in wishlist table
-            query = "INSERT INTO Wishlist(AccountID, ItemId, ItemName, Brand, Price, Color, Size) VALUES (?, ?, ?, ?, ?, ?, ?)"
-            
-            # the variable for accountId isn't uniform in the project files, will fix this later
-            data = (AccountID, ItemID, item[0], item[1], item[2], item[3], item[4])
-            self.cursor.execute(query, data)
+            self.cursor.execute("INSERT INTO Wishlist(AccountID, ItemId, ItemName, Brand, Price, Color, Size) VALUES (?, ?, ?, ?, ?, ?, ?)", AccountID, ItemID, item[0], item[1], item[2], item[3], item[4])
             self.connection.commit()
         
         except sqlite3.IntegrityError:

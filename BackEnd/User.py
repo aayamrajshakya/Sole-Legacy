@@ -25,7 +25,7 @@ class User:
 
     # TODO: Password encryption for secure login
     # Login Function
-    def CreatAccount(self) -> None:
+    def CreateAccount(self) -> None:
         FirstName: str = ""
         MiddleName: str = ""
         LastName: str = ""
@@ -110,6 +110,11 @@ class User:
                 continue
             else:
                 break
+
+        # For testing Seller (Worked to fix my seller error where the values of those below were not available to the seller class on register)
+        self.UserID = UserID  # Assign the generated UserID to the instance variable
+        self.Email = Email    # Ensure Email is set correctly
+        self.Password = Password  # Ensure Password is set correctly
 
         # if email specifically includes "sole-legacy" within email address add to admin database instead
         if "@sole-legacy" in Email.lower():

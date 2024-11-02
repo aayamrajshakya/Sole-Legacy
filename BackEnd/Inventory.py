@@ -2,7 +2,6 @@ import sqlite3
 import sys
 import random
 
-
 class Inventory:
 
     # Class Initializer
@@ -28,9 +27,7 @@ class Inventory:
 
         # Tries initial Query to add the item to the database
         try:
-            Query: str = "INSERT INTO Inventory (ItemID, Brand, ItemName, Description, Image, Quantity, Color, Size) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-            Data: tuple = (ItemID, Brand, ItemName, Description, Image, Quantity, Color, Size)
-            self.cursor.execute(Query, Data)
+            self.cursor.execute("INSERT INTO Inventory (ItemID, Brand, ItemName, Description, Image, Quantity, Color, Size) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (ItemID, Brand, ItemName, Description, Image, Quantity, Color, Size))
             self.connection.commit()
 
         ### https://stackoverflow.com/questions/36518628/sqlite3-integrityerror-unique-constraint-failed-when-inserting-a-value
@@ -42,12 +39,8 @@ class Inventory:
     # Function for removing items from Inventory database
     def RemoveProduct(self, ItemID: str) -> None:
         
-        Query: str = "DELETE FROM Inventory WHERE ItemID=?"
-        Data: tuple = (ItemID,)
-
         # Searches Database Table for the ItemID
-        Search: str = "SELECT * FROM Inventory WHERE ItemID=?"
-        self.cursor.execute(Search, Data)
+        self.cursor.execute("SELECT * FROM Inventory WHERE ItemID=?", (ItemID,))
         result = self.cursor.fetchall()
 
         # If the ItemID doesn't exist then raise exception for error checking
@@ -55,7 +48,7 @@ class Inventory:
             raise Exception(f"The item by the ID {ItemID} was not found\n")
 
         else:
-            self.cursor.execute(Query, Data)
+            self.cursor.execute("DELETE FROM Inventory WHERE ItemID=?", (ItemID,))
             self.connection.commit()
             print(f"Successfully removed item {ItemID}\n")
 

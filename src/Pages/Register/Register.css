@@ -1,7 +1,81 @@
-body{
-    height: 100vh;
-  }
+.page_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(245, 245, 245);
+}
 
-  input{
-    font-size: 1.2rem;
+.login_box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.register .storeName h3 {
+  text-align: center;
+}
+
+.register .form {
+  margin-top: 20px;
+}
+
+.register label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.register input[type="email"],
+.register input[type="text"],
+.register input[type="password"] {
+  width: 100%;
+  max-width: 100%; /* Ensure it does not exceed container width */
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.register button {
+  width: 100%;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.register button:hover {
+  background-color: #4cae4c;
+}
+
+.register .bottom_text {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.register .bottom_text {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register .bottom_text a:hover {
+  text-decoration: underline;
+}
+
+/* User-type */
+.role_selection {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.radio-inline {
+  display: flex;
 }
