@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: rgb(245, 245, 245);
+  background-color: rgba(236,239,241,255);
 }
 
 .login_box {
@@ -42,7 +42,7 @@
 .login .signIn {
   width: 100%;
   padding: 10px;
-  background-color: #5cb85c;
+  background-color: #516a76;
   color: white;
   border: none;
   border-radius: 4px;
@@ -51,17 +51,19 @@
 }
 
 .login button:hover {
-  background-color: #4cae4c;
+  background-color: #6a8b97;
 }
 
 .login .bottom_text {
   text-align: center;
   margin-top: 15px;
+  color: #bdbdbd;
+  text-decoration: none;
 }
 
-.login .bottom_text {
-  color: #007bff;
-  text-decoration: none;
+.login a {
+  color: #546e7a;
+
 }
 
 .login .bottom_text a:hover {
