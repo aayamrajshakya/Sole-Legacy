@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect, url_for, session
 from flask_cors import CORS
 from user import User
 
@@ -7,7 +7,6 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_crede
 
 user = User()
 
-####################################### USER CLASS STARTS ################################
 @app.route('/login', methods=['POST'])
 def login():
     email = request.json.get("email")
@@ -34,16 +33,6 @@ def register():
         return jsonify({"message": "Successfully registered"}), 201
     else:
         return jsonify({"error": res}), 409
-
-####################################### USER CLASS ENDS ##################################
-
-
-####################################### PRODUCT CLASS STARTS #############################
-
-
-
-####################################### PRODUCT CLASS END ################################
-
 
 if __name__ == '__main__':
     app.run(debug=True)

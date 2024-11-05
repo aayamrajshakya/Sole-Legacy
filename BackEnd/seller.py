@@ -1,9 +1,8 @@
 import sqlite3
-import sys
 from typing import List
-from Product import Product
-from Inventory import Inventory
-from User import User
+from product import Product
+from inventory import Inventory
+from user import User
 
 
 class Seller(User):
@@ -19,7 +18,6 @@ class Seller(User):
             self.cursor.execute("INSERT INTO SellerAccounts (SellerID, Email, Password, StoreName) VALUES (?, ?, ?, ?)",
                                 (self.UserID, self.Email, self.Password, self.StoreName))
             self.inventory.connection.commit()
-            print("Seller account successfully created!")
         except sqlite3.Error as e:
             print(f"ERROR: An error occurred while inserting into SellerAccounts database: {e}")
 
@@ -32,10 +30,8 @@ class Seller(User):
             listings = self.inventory.cursor.fetchall()
 
             if not listings:
-                print("No listings available for this brand.")
                 return []  # Return an empty list if no listings are found
             else:
-                print("Listings for Brand:", brand)
                 for listing in listings:
                     print(f"ID: {listing[0]}, Brand: {listing[1]}, ItemName: {listing[2]}, Quantity: {listing[3]}, Size: {listing[4]}, Price: ${listing[2]}")
                 return listings  # Return the listings

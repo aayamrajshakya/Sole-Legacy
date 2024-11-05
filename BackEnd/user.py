@@ -17,7 +17,7 @@ class User:
 
         if self.cursor.fetchone():
             return "Email address in use"
-        
+            
         # https://peerdh.com/blogs/programming-insights/implementing-password-hashing-techniques-in-user-authentication-for-crud-applications-with-sqlite
         # https://stackoverflow.com/a/48213392/23011800
         bvalue = plain_password.encode('utf-8')
@@ -33,25 +33,20 @@ class User:
             return f"Error: {error}"
     
     def loginAccount(self, email: str, plain_password: str) -> str:
-        try:
-            self.cursor.execute("SELECT * FROM UserAccounts WHERE Email=?", (email,))
-            result = self.cursor.fetchone()
+        self.cursor.execute("SELECT * FROM UserAccounts WHERE Email=?", (email,))
+        result = self.cursor.fetchone()
 
-            if result is None:
-                return "Email address not found"
+        if result is None:
+            return "Email address not found"
             
-            hashed_password = result[3]
-            if bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8')):
-                self.loggedIn = True
-                self.loggedAccountID = result[0]
-                return "successful"
-        
-            else:
-                return "Login credentials don't match"
+        hashed_password = result[3]
+        if bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8')):
+            self.loggedIn = True
+            self.loggedAccountID = result[0]
+            return "successful"
+        else:
+            return "Login credentials don't match"
 
-        except sqlite3.Error as error:
-            return f"{error}"
-        
     def logoutAccount(self):
         self.loggedAccountID = None
         self.loggedIn = False
@@ -77,7 +72,6 @@ class User:
             self.cursor.execute("DELETE FROM UserAccounts WHERE Email=?", (self.loggedAccountID,))
             self.connection.commit()
             if self.cursor.rowcount > 0:
-
                 # clear session after deleting the account
                 self.loggedIn = False
                 self.loggedAccountID = None
@@ -85,5 +79,4 @@ class User:
             else:
                 return "failure"
         except sqlite3.Error as error:
-            return f"ERROR: {error}"
-        
+                return f"ERROR: {error}"

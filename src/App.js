@@ -12,6 +12,9 @@ import { Wishlist } from './Pages/Wishlist/Wishlist'
 import { IndivShoe } from './Pages/IndivShoe/IndivShoe'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { Logout } from './Pages/Login/Logout';
+
+
 function App() {
   return (
     <div className="App">
@@ -27,6 +30,9 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
+
+        <Route path='/logout' element={<Logout/>}/>
+
       </Routes>
       </BrowserRouter>
       <Footer />

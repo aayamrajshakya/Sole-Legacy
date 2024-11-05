@@ -35,11 +35,7 @@ class Inventory:
         except sqlite3.IntegrityError:
             raise Exception(f"A product with item id {ItemID} already exists\n")
 
-
-    # Function for removing items from Inventory database
     def RemoveProduct(self, ItemID: str) -> None:
-        
-        # Searches Database Table for the ItemID
         self.cursor.execute("SELECT * FROM Inventory WHERE ItemID=?", (ItemID,))
         result = self.cursor.fetchall()
 
