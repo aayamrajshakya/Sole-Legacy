@@ -1,0 +1,71 @@
+.page_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(236,239,241,255);
+}
+
+.login_box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.login .storeName h3 {
+  text-align: center;
+}
+
+.login .form {
+  margin-top: 20px;
+}
+
+.login label {
+  display: block;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+  width: 100%;
+  max-width: 100%; /* Ensure it does not exceed container width */
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.login .signIn {
+  width: 100%;
+  padding: 10px;
+  background-color: #516a76;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login button:hover {
+  background-color: #6a8b97;
+}
+
+.login .bottom_text {
+  text-align: center;
+  margin-top: 15px;
+  color: #bdbdbd;
+  text-decoration: none;
+}
+
+.login a {
+  color: #546e7a;
+
+}
+
+.login .bottom_text a:hover {
+  text-decoration: underline;
+}

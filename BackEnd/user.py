@@ -48,6 +48,8 @@ class User:
             return "Login credentials don't match"
 
     def logoutAccount(self):
+        if not self.loggedIn:
+            return "not even logged in"
         self.loggedAccountID = None
         self.loggedIn = False
         return "successful"
@@ -56,7 +58,6 @@ class User:
         # only logged-in user can update info
         if not self.loggedIn:
             return "must log in"
-        
         try:
             self.cursor.execute(f"UPDATE UserAccounts SET {parameter}=? WHERE AccountID=?", (newVal, self.loggedAccountID))
             self.connection.commit()
@@ -64,19 +65,16 @@ class User:
         except sqlite3.Error as error:
             return f"ERROR: {error}"
     
-    def deleteAccount(self) -> str:
+    def deleteAccount(self):
         if not self.loggedIn:
             return "must log in"
-        
-        try:
-            self.cursor.execute("DELETE FROM UserAccounts WHERE Email=?", (self.loggedAccountID,))
-            self.connection.commit()
-            if self.cursor.rowcount > 0:
-                # clear session after deleting the account
-                self.loggedIn = False
-                self.loggedAccountID = None
-                return "sucessful"
-            else:
-                return "failure"
-        except sqlite3.Error as error:
-                return f"ERROR: {error}"
+
+        self.cursor.execute("DELETE FROM UserAccounts WHERE Email=?", (self.loggedAccountID,))
+        self.connection.commit()
+        if self.cursor.rowcount > 0:
+            # clear session after deleting the account
+            self.loggedIn = False
+            self.loggedAccountID = None
+            return "sucessful"
+        else:
+            return "failure"

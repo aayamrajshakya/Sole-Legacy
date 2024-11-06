@@ -5,14 +5,13 @@ import { NavBar } from './Components/NavBar/NavBar';
 import { Homepage } from './Pages/Homepage/Homepage';
 import { Men } from './Pages/Men/Men';
 import { Women } from './Pages/Women/Women';
-import { Login } from './Pages/Login/Login';
+import { Login } from './Pages/Authentication/Login';
 import { Register } from './Pages/Register/Register';
 import { Cart } from './Pages/Cart/Cart';
 import { Wishlist } from './Pages/Wishlist/Wishlist'
 import { IndivShoe } from './Pages/IndivShoe/IndivShoe'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import { Logout } from './Pages/Login/Logout';
+import { Dashboard } from './Pages/Authentication/Dashboard';
 
 
 function App() {
@@ -30,9 +29,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
-
-        <Route path='/logout' element={<Logout/>}/>
-
+        <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>
       </BrowserRouter>
       <Footer />

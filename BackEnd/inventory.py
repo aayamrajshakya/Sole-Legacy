@@ -1,5 +1,4 @@
 import sqlite3
-import sys
 import random
 
 class Inventory:
@@ -15,8 +14,7 @@ class Inventory:
 
         # If connection fails raises error and exits program
         except sqlite3.Error as error:
-            print(f"ERROR: {error}")
-            sys.exit()
+             return f"{error}"
 
 
     # Function for Adding Items to the Inventory database
@@ -32,8 +30,8 @@ class Inventory:
 
         ### https://stackoverflow.com/questions/36518628/sqlite3-integrityerror-unique-constraint-failed-when-inserting-a-value
         # If the item already exists then will raise an error
-        except sqlite3.IntegrityError:
-            raise Exception(f"A product with item id {ItemID} already exists\n")
+        except sqlite3.IntegrityError as error:
+            return f"{error}"
 
     def RemoveProduct(self, ItemID: str) -> None:
         self.cursor.execute("SELECT * FROM Inventory WHERE ItemID=?", (ItemID,))
@@ -46,7 +44,7 @@ class Inventory:
         else:
             self.cursor.execute("DELETE FROM Inventory WHERE ItemID=?", (ItemID,))
             self.connection.commit()
-            print(f"Successfully removed item {ItemID}\n")
+            return "successfully deleted"
 
     # Function of updating database item quantities
     def UpdateStockQuantity(self, ItemID: str, Quantity: int, AddOrRemove: bool) -> None:
@@ -56,7 +54,7 @@ class Inventory:
         result = self.cursor.fetchone()
 
         if not result:
-            raise Exception(f"The item by the ID {ItemID} was not found\n")
+            return "item not found"
 
         # fetchone gives us the quantity only; this removes the need to select the first element
         # of the first row as we had to do when fetchall was used

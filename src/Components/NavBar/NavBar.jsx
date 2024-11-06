@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import cart_icon from "../Assets/general/cart.png"
 import login_icon from "../Assets/general/login.png"
 import wishlist_icon from "../Assets/general/wishlist.png"
+import dashboard_icon from "../Assets/general/dashboard.png"
 
 export const NavBar = () => {
   return (
@@ -20,6 +21,9 @@ export const NavBar = () => {
         <div className="nav-icons">
           <Link to="/login" className="nav-login">
           <img src={login_icon} />
+          </Link>
+          <Link to="/dashboard" className="nav-login">
+          <img src={dashboard_icon} />
           </Link>
           <Link to="/cart" className="nav-cart">
           <img src={cart_icon} />
