@@ -27,13 +27,12 @@ export const Cart = () => {
     return (
       <div className="cart_page">
         {isLoggedIn ? (
-          <h1>Logged in, hi!</h1>
+          <h3>Cart</h3>
         ) : (
           <>
-            <h3>This page is unaccessible!</h3>
+            <h3>This page is inaccessible!</h3>
             <h4>Please log in and come back.</h4>
             <Link to="/login"><button class="action_btn" role="button">Log in <img src={login_icon} /></button></Link>
-
           </>
         )}
       </div>

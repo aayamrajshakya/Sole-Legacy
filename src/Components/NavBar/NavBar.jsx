@@ -1,9 +1,10 @@
 import "./NavBar.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import cart_icon from "../Assets/general/cart.png"
-import login_icon from "../Assets/general/login.png"
-import wishlist_icon from "../Assets/general/wishlist.png"
-import dashboard_icon from "../Assets/general/dashboard.png"
+import cart_icon from "../Assets/general/cart.png";
+import login_icon from "../Assets/general/login.png";
+import wishlist_icon from "../Assets/general/wishlist.png";
+import dashboard_icon from "../Assets/general/dashboard.png";
+import search_icon from "../Assets/general/search.png";
 
 export const NavBar = () => {
   return (
@@ -19,10 +20,13 @@ export const NavBar = () => {
             <Link className="nav-link" to ="/">Home</Link>
         </ul>
         <div className="nav-icons">
+          <Link to="/search" className="nav-search">
+          <img src={search_icon} />
+          </Link>
           <Link to="/login" className="nav-login">
           <img src={login_icon} />
           </Link>
-          <Link to="/dashboard" className="nav-login">
+          <Link to="/dashboard" className="nav-dashboard">
           <img src={dashboard_icon} />
           </Link>
           <Link to="/cart" className="nav-cart">

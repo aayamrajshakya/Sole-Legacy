@@ -1,0 +1,11 @@
+.error_page {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 130px;
+  }
+
+  .error_code{
+    font-size: 90px;
+    margin: 0;
+  }

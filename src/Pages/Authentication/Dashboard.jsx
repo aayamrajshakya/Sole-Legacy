@@ -75,15 +75,15 @@ export const Dashboard = () => {
               <td>{data.Name || "N/A"}</td>
             </tr>
             <tr>
-              <td>Phone Number</td>
+              <td>Email Address</td>
               <td>{data.EmailAddress || "N/A"}</td>
             </tr>
             <tr>
-              <td>User Type</td>
+              <td>Home Address</td>
               <td>{data.HomeAddress || "N/A"}</td>
             </tr>
             <tr>
-              <td>Home Address</td>
+              <td>User Type</td>
               <td>{data.UserRole || "N/A"}</td>
             </tr>
         </table>

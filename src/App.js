@@ -8,11 +8,12 @@ import { Women } from './Pages/Women/Women';
 import { Login } from './Pages/Authentication/Login';
 import { Register } from './Pages/Register/Register';
 import { Cart } from './Pages/Cart/Cart';
-import { Wishlist } from './Pages/Wishlist/Wishlist'
-import { IndivShoe } from './Pages/IndivShoe/IndivShoe'
+import { Wishlist } from './Pages/Wishlist/Wishlist';
+import { IndivShoe } from './Pages/IndivShoe/IndivShoe';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Dashboard } from './Pages/Authentication/Dashboard';
-
+import { PageNotFound } from './Components/PageNotFound/PageNotFound';
+import { Search } from './Pages/Search/Search';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/search' element={<Search/>}/>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       </BrowserRouter>
       <Footer />

@@ -1,62 +1,88 @@
-// https://medium.com/geekculture/how-to-use-react-router-useparams-436851fd5ef6
-// https://getcssscan.com/css-buttons-examples
-
-import React from 'react'
-import "./IndivShoe.css"
-import { showcase, women, men } from "../../shoeInventory"
-import { useParams } from 'react-router-dom'
-import addToCart from "../../Components/Assets/general/addtocart.png"
-import wishlist from "../../Components/Assets/general/wishlist.png"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import "./IndivShoe.css";
+import { useParams } from 'react-router-dom';
+import addToCart from "../../Components/Assets/general/addtocart.png";
+import wishlist from "../../Components/Assets/general/wishlist.png";
 
 export const IndivShoe = () => {
     const { url } = useParams();
-    let allShoes = [...women,...men]
-  return (
-    <div className="main_div">
-        {allShoes.filter(shoe => shoe.url === url).map((shoe, index) =>(
-            <div key={index} className="indivShoePage">
+    const [shoe, setShoe] = useState(null);
+    const [shoeSize, setShoeSize] = useState('9');                  // default shoe size if not selected anything
+    const [shoeColor, setShoeColor] = useState('White');            // default shoe color if not selected anything
+
+    const addToWishlist = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/addToWishlist', {
+                ItemName: shoe.ItemName,
+                Price: shoe.Price,
+                Color: shoeColor,
+                Size: shoeSize,
+                Gender: shoe.Gender,
+                Slug: shoe.Image
+            }, {
+                withCredentials: true
+            });
+            alert(response.data.message);
+        } catch (error) {
+            alert(error.response?.data?.error || "Flask server offline");
+        }
+};
+
+    useEffect(() => {
+        const fetchShoeData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/shoe/${url}`);
+                setShoe(response.data);
+            } catch (error) {
+                alert(error.response?.data?.error || "Flask server offline");
+            }
+        };
+        fetchShoeData();
+    }, [url]);
+
+    if (!shoe) {
+        return null; // Show a loading message while fetching data
+    }
+
+    return (
+        <div className="main_div">
+            <div className="indivShoePage">
                 <div className="indivShoe_img">
-                <img src = {shoe.image} />
+                <img src={`${process.env.PUBLIC_URL}/${shoe.Gender}/${shoe.Image}`} />
                 </div>
-            <div className="indivShoe_info">
-                {/* The new edition shoe in showcase will get an additional component: old price */}
-                {/* https://codesource.io/blog/how-to-use-ternary-operator-in-react/ */}
-                {/* here, I choose its url as a unique identifier */}
-                
-                <h3>{shoe.name} <div className="special_offer">{shoe.url==="Nike_Air_Jordan_1" ? "Old price: $179" : ""}<div className="price">${shoe.price} </div>
-                </div></h3>
-                
-                <h3>Description <div className="description">{shoe.description}</div></h3>
+                <div className="indivShoe_info">
+                    <h3>{shoe.ItemName}
+                    <div className="special_offer">{shoe.ItemName=="Nike Air Jordan 1" ? "Old price: $179" : ""}<div className="price">${shoe.Price} </div>
+                    </div>  
+                    </h3>
+                    <h3>Description <div className="description">{shoe.Description}</div></h3>
+                    <div className="dropdown_menus">
+                        <label for="shoeSize">Size: </label>
+                        <select name="size" id="size" value={shoeSize} onChange={(e) => setShoeSize(e.target.value)}>
+                            <option value="8">{shoe.Gender === "women" ? "8 F" : "8 M"}</option>
+                            <option value="8.5">{shoe.Gender === "women" ? "8.5 F" : "8.5 M"}</option>
+                            <option value="9" selected>{shoe.Gender === "women" ? "9 F" : "9 M"}</option>
+                            <option value="9.5">{shoe.Gender === "women" ? "9.5 F" : "9.5 M"}</option>
+                            <option value="10">{shoe.Gender === "women" ? "10 F" : "10 M"}</option>
+                            <option value="10.5">{shoe.Gender === "women" ? "10.5 F" : "10.5 M"}</option>
+                            <option value="11">{shoe.Gender === "women" ? "11 F" : "11 M"}</option>
+                        </select>
 
-                <div className="dropdown_menus">
-                <label for="shoeSize">Size: </label>
-                <select name="size" id="size">
-                <option value="8">{shoe.gender==="women" ? "8 F" : "8 M"}</option>
-                <option value="8.5">{shoe.gender==="women" ? "8.5 F" : "8.5 M"}</option>
-                <option value="9" selected>{shoe.gender==="women" ? "9 F" : "9 M"}</option>
-                <option value="9.5">{shoe.gender==="women" ? "9.5 F" : "9.5 M"}</option>
-                <option value="10">{shoe.gender==="women" ? "10 F" : "10 M"}</option>
-                <option value="10.5">{shoe.gender==="women" ? "10.5 F" : "10.5 M"}</option>
-                <option value="11">{shoe.gender==="women" ? "11 F" : "11 M"}</option>
-                </select>
+                        <label for="shoeColor">Color: </label>
+                        <select name="color" id="color" value={shoeColor} onChange={(e) => setShoeColor(e.target.value)}>
+                        <option value="White">White</option>
+                        <option value="Yellow">Yellow</option> 
+                        <option value="Green">Green</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Grey">Grey</option>
+                        </select>
+                    </div>
 
-                <label for="shoeColor">Color: </label>
-                <select name="color" id="color">
-                <option value="color1" selected>{shoe.gender==="women" ? "Pink" : "Black"}</option>
-                <option value="color2">{shoe.gender==="women" ? "Purple" : "Blue"}</option>
-                <option value="color3">{shoe.gender==="women" ? "Golden" : "Green"}</option>
-                <option value="color4">White</option>
-                <option value="color5">Yellow</option>
-
-                </select>
+                    <button class="button-35" role="button">Add to cart <img src={addToCart} /></button>
+                    <button onClick={addToWishlist} class="button-35" role="button">Favorite<img className="wishlist" src={wishlist} /></button>
                 </div>
-
-                <button class="button-35" role="button">Add to cart <img src={addToCart} /></button>
-                <button class="button-35" role="button">Favorite<img className="wishlist" src={wishlist} /></button>
-
             </div>
-            </div>
-        ))}
-    </div>
-  )
-}
+        </div>
+    );
+};

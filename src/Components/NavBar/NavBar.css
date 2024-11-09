@@ -57,6 +57,8 @@
   }
   
   .nav-login img,
+  .nav-dashboard img,
+  .nav-search img,
   .nav-cart img,
   .nav-wishlist img {
     width: 25px;

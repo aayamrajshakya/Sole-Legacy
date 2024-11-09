@@ -11,14 +11,13 @@ def initialize_database():
         tables = {
             "Inventory": """CREATE TABLE IF NOT EXISTS Inventory (
                           ItemID INTEGER PRIMARY KEY AUTOINCREMENT,
-                          Brand VARCHAR(50) NOT NULL,
                           ItemName VARCHAR(80) NOT NULL,
                           Description TEXT NOT NULL,
                           Image TEXT NOT NULL,
                           Url TEXT NOT NULL,
                           Quantity INTEGER NOT NULL,
                           Price FLOAT NOT NULL,
-                          Gender VARCHAR(2) NOT NULL
+                          Gender TEXT NOT NULL,
                           )""",
 
             "UserAccounts": """CREATE TABLE IF NOT EXISTS UserAccounts (
@@ -61,13 +60,12 @@ def initialize_database():
 
             "Wishlist": """CREATE TABLE IF NOT EXISTS Wishlist (
                          AccountID INTEGER NOT NULL,
-                         ItemID INTEGER NOT NULL,
                          ItemName VARCHAR(80) NOT NULL,
-                         Brand VARCHAR(50) NOT NULL,
                          Price FLOAT NOT NULL,
                          Color VARCHAR(25) NOT NULL,
                          Size VARCHAR(30) NOT NULL,
-                         FOREIGN KEY (ItemID) REFERENCES Inventory(ItemID),
+                         Gender VARCHAR(10) NOT NULL,
+                         Slug TEXT NOT NULL,                
                          FOREIGN KEY (AccountID) REFERENCES UserAccounts(AccountID)
                          )"""
         }
@@ -85,3 +83,6 @@ def initialize_database():
 
 if __name__ == "__main__":
     initialize_database()
+
+
+#  FOREIGN KEY (ItemID) REFERENCES Inventory(ItemID),
