@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import './Dashboard.css'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logout_icon from "../../Components/Assets/general/logout.png"
 import delete_icon from "../../Components/Assets/general/delete.png"
+import history_icon from "../../Components/Assets/general/addtocart.png"
 
 export const Dashboard = () => {
     const navigate = useNavigate();
@@ -87,8 +88,10 @@ export const Dashboard = () => {
               <td>{data.UserRole || "N/A"}</td>
             </tr>
         </table>
-        <button class="action_btn" role="button" onClick={handleLogout}>Log out <img src={logout_icon} /></button>
-        <button class="action_btn" role="button" onClick={handleDelete}>Delete <img src={delete_icon} /></button>
+        <Link to="/orders"><button className="dashboard_btn">Order history <img src={history_icon} /></button></Link>
+        <button class="dashboard_btn" role="button" onClick={handleLogout}>Log out <img src={logout_icon} /></button>
+        <button class="dashboard_btn" role="button" onClick={handleDelete}>Delete <img src={delete_icon} /></button>
+        
 
     </div>
     );

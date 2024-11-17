@@ -1,10 +1,15 @@
 # Sole Legacy
 
-**Motto:** "Nike's quality at Temu's price"
+## How to Run
+Assuming you already have pip, npm, and other top-lvl dependencies installed on your device:
+1) Clone this repo.
+2) Navigate to the repo directory and run `npm install` to install all the necessary dependencies for the frontend.
+3) While in the root directory, run `pip install -r requirements.txt` to install any dependencies for the backend.
+4) Navigate to the Backend folder and run the Flask file app.py with the command `python app.py`.
+5) You can run React from anywhere within the project directory by executing `npm start`.
 
 ## Table of Contents
-- [Overview](#description)
-- [Objective](#objective)
+- [Overview](#overview)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 

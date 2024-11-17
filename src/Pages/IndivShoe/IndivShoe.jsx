@@ -29,6 +29,24 @@ export const IndivShoe = () => {
         }
 };
 
+    const handleAddToCart = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/cart/add', {
+                itemName: shoe.ItemName,
+                quantity: 1  // You could add a quantity selector if needed
+            }, {
+                withCredentials: true  // Important for session handling
+            });
+            alert(response.data.message);
+        } catch (error) {
+            if (error.response?.status === 401) {
+                alert("Log in first!");
+            } else {
+                alert(error.response?.data?.error || "Failed to add item to cart");
+            }
+        }
+};
+
     useEffect(() => {
         const fetchShoeData = async () => {
             try {
@@ -53,7 +71,7 @@ export const IndivShoe = () => {
                 </div>
                 <div className="indivShoe_info">
                     <h3>{shoe.ItemName}
-                    <div className="special_offer">{shoe.ItemName=="Nike Air Jordan 1" ? "Old price: $179" : ""}<div className="price">${shoe.Price} </div>
+                    <div className="special_offer">{shoe.ItemName==="Nike Air Jordan 1" ? "Old price: $179" : ""}<div className="price">${shoe.Price} </div>
                     </div>  
                     </h3>
                     <h3>Description <div className="description">{shoe.Description}</div></h3>
@@ -79,8 +97,8 @@ export const IndivShoe = () => {
                         </select>
                     </div>
 
-                    <button class="button-35" role="button">Add to cart <img src={addToCart} /></button>
-                    <button onClick={addToWishlist} class="button-35" role="button">Favorite<img className="wishlist" src={wishlist} /></button>
+                    <button onClick={handleAddToCart} class="button-35">Add to cart <img src={addToCart} /></button>
+                    <button onClick={addToWishlist} class="button-35">Favorite<img className="wishlist" src={wishlist} /></button>
                 </div>
             </div>
         </div>

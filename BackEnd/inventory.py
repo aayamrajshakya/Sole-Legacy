@@ -1,31 +1,33 @@
 import sqlite3
 import random
+import sys
+
 
 class Inventory:
 
     # Class Initializer
     def __init__(self):
         self.databaseName = "StoreDatabase.db"
-
         # Attempts Database connection
         try:
-            self.connection = sqlite3.connect(self.databaseName)
+            self.connection = sqlite3.connect(self.databaseName, check_same_thread=False)
             self.cursor = self.connection.cursor()
 
         # If connection fails raises error and exits program
         except sqlite3.Error as error:
-             return f"{error}"
+            print(f"{error}")
+            sys.exit()
 
 
     # Function for Adding Items to the Inventory database
-    def AddProduct(self, Brand: str, ItemName: str, Description: str, Image: str, Quantity: int, Color: str, Size: str, Price: str, Gender: str) -> None:
+    def AddProduct(self, ItemName: str, Description: str, Image: str, Url: str , Quantity: int, Price: str, Gender: str):
         
         ### https://www.w3schools.com/python/ref_random_randint.asp
         ItemID = str(random.randint(10000000, 99999999))
 
         # Tries initial Query to add the item to the database
         try:
-            self.cursor.execute("INSERT INTO Inventory (ItemID, Brand, ItemName, Description, Image, Quantity, Color, Size, Price, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (ItemID, Brand, ItemName, Description, Image, Quantity, Color, Size, Price, Gender))
+            self.cursor.execute("INSERT INTO Inventory (ItemID, ItemName, Description, Image, Url , Quantity, Price, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (ItemID, ItemName, Description, Image, Url, Quantity, Price, Gender))
             self.connection.commit()
 
         ### https://stackoverflow.com/questions/36518628/sqlite3-integrityerror-unique-constraint-failed-when-inserting-a-value
@@ -33,7 +35,7 @@ class Inventory:
         except sqlite3.IntegrityError as error:
             return f"{error}"
 
-    def RemoveProduct(self, ItemID: str) -> None:
+    def RemoveProduct(self, ItemID: str):
         self.cursor.execute("SELECT * FROM Inventory WHERE ItemID=?", (ItemID,))
         result = self.cursor.fetchall()
 
@@ -47,7 +49,7 @@ class Inventory:
             return "successfully deleted"
 
     # Function of updating database item quantities
-    def UpdateStockQuantity(self, ItemID: str, Quantity: int, AddOrRemove: bool) -> None:
+    def UpdateStockQuantity(self, ItemID: str, Quantity: int, AddOrRemove: bool):
 
         # Initial query to grab the quantity of the item with the proper item ID
         self.cursor.execute("SELECT Quantity FROM Inventory WHERE ItemID=?", (ItemID,))
@@ -76,7 +78,7 @@ class Inventory:
 
     ### https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-transaction.html        
     # De-constructor to ensure closing of connections
-    def __del__(self):
-        self.connection.commit()
-        self.cursor.close()
-        self.connection.close()
+    # def __del__(self):
+    #     self.connection.commit()
+    #     self.cursor.close()
+    #     self.connection.close()

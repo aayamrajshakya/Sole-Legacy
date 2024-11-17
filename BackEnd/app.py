@@ -3,14 +3,23 @@
 from flask import Flask, request, jsonify, session, g
 from flask_cors import CORS
 from user import User
+from seller import Seller
+from inventory import Inventory
+from cart import Cart
+from order import Order
 from functools import wraps
 import sqlite3
+import logging
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
 app.secret_key = 'canputanythinghere'
 user = User()
+seller = Seller()
+inventory = Inventory()
+cart = Cart()
+order = Order()
 
 
 def login_required(f):
@@ -21,6 +30,14 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def seller_required(f):
+    """Decorator to ensure the logged-in user is a seller."""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if g.usertype != "Seller":
+            return jsonify({"error": "Must be logged in as a seller"}), 403
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.before_request
 def load_user():
@@ -111,7 +128,283 @@ def delete():
         return jsonify({"message": "Successfully deleted account!"}), 200
     except:
         return jsonify({"error": "Deletion failed."}), 500
+
+
+@app.route('/cart/add', methods=['POST'])
+@login_required
+def add_to_cart():
+    try:
+        # Get request parameters
+        item_name = request.json.get("itemName")
+        quantity = request.json.get("quantity", 1)
+
+        # Validate required fields
+        if not all([item_name, quantity]):
+            return jsonify({"error": "Item name and quantity are required"}), 400
+
+        # Call the Cart class method
+        result = cart.addItem(g.accountID, item_name, str(quantity))
+        
+        if result == "Item added to cart successfully":
+            return jsonify({"message": result}), 201
+        else:
+            return jsonify({"error": result}), 400
+
+    except Exception as e:
+        logging.error(f"Error adding item to cart: {str(e)}")
+        return jsonify({"error": "Server error while adding item to cart"}), 500
     
+
+@app.route('/cart/remove', methods=['POST'])
+@login_required
+def remove_from_cart():
+    try:
+        item_id = request.json.get("itemId")
+        if not item_id:
+            return jsonify({"error": "Item ID is required"}), 400
+            
+        result = cart.removeItem(item_id)
+        
+        if result == "Item removed from cart successfully":
+            return jsonify({"message": result}), 200
+        else:
+            return jsonify({"error": result}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/cart/update', methods=['PUT'])
+@login_required
+def update_cart_quantity():
+    try:
+        item_id = request.json.get("itemId")
+        quantity = request.json.get("quantity")
+        
+        if not all([item_id, quantity]):
+            return jsonify({"error": "Item ID and quantity are required"}), 400
+            
+        result = cart.updateQuantity(item_id, quantity)
+        
+        if result == "Quantity updated successfully":
+            return jsonify({"message": result}), 200
+        else:
+            return jsonify({"error": result}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/cart/items', methods=['GET'])
+@login_required
+def get_cart_items():
+    try:
+        items = cart.summarizeCart(g.accountID)
+        total = cart.calculateTotal(g.accountID)
+        
+        return jsonify({
+            "items": [
+                {
+                    "itemId": item[0],
+                    "name": item[1],
+                    "description": item[2],
+                    "image": item[3],
+                    "quantity": item[4],
+                    "price": item[5],
+                    "gender": item[6]
+                } for item in items
+            ],
+            "total": total
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/order/checkout', methods=['POST'])
+@login_required
+def process_checkout():
+    try:
+        payment_method = request.json.get('paymentMethod')
+        if not payment_method:
+            return jsonify({"error": "Payment method is required"}), 400
+            
+        # Process payment
+        payment_result = order.processPayment(payment_method)
+        if payment_result != "Payment processed successfully":
+            return jsonify({"error": payment_result}), 400
+            
+        # Complete checkout
+        result = order.checkout(g.accountID)
+        if isinstance(result, dict) and "orderID" in result:
+            return jsonify(result), 200
+        else:
+            return jsonify({"error": result}), 400
+            
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/order/<int:order_id>', methods=['GET'])
+@login_required
+def get_order(order_id):
+    try:
+        result = order.getOrderDetails(order_id)
+        if isinstance(result, dict):
+            return jsonify(result), 200
+        else:
+            return jsonify({"error": result}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/orders', methods=['GET'])
+@login_required
+def get_user_orders():
+    try:
+        connection = sqlite3.connect("StoreDatabase.db")
+        cursor = connection.cursor()
+        
+        cursor.execute("""
+            SELECT OrderID, OrderDate, AmountTotal
+            FROM Orders
+            WHERE AccountID = ?
+            ORDER BY OrderDate DESC
+        """, (g.accountID,))
+        
+        orders = cursor.fetchall()
+        return jsonify({
+            "orders": [{
+                "orderID": order[0],
+                "orderDate": order[1],
+                "totalAmount": order[2]
+            } for order in orders]
+        }), 200
+        
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        connection.close()
+
+@app.route('/seller/product', methods=['POST'])
+@login_required
+@seller_required
+def add_product():
+    
+    try:
+        item_name = request.json.get("itemName")
+        description = request.json.get("description")
+        image = request.json.get("image")
+        url = request.json.get("url")
+        quantity = request.json.get("quantity")
+        price = request.json.get("price")
+        gender = request.json.get("gender")
+
+        # Validate required fields
+        if not all([item_name, description, image, url, quantity, price, gender]):
+            return jsonify({"error": "All fields are required"}), 400
+
+        # Call the Seller class method
+        result = seller.AddProduct(item_name, description, image, url, quantity, price, gender)
+        
+        if result == "successful":
+            return jsonify({"message": "Product added successfully"}), 201
+        else:
+            return jsonify({"error": "Failed to add product"}), 500
+
+    except Exception as e:
+        logging.error(f"Error adding product: {str(e)}")
+        return jsonify({"error": "Server error while adding product"}), 500
+
+@app.route('/seller/listings', methods=['GET'])
+@login_required
+@seller_required
+def view_listings():
+    item_name = request.args.get('itemName')
+    if not item_name:
+        return jsonify({
+            'error': 'item_name parameter is required',
+            'listings': []
+        }), 400
+
+    try:
+        connection = sqlite3.connect("StoreDatabase.db")
+        cursor = connection.cursor()
+        
+        query = "SELECT * FROM Inventory WHERE itemName LIKE ?"
+        cursor.execute(query, ('%' + item_name + '%',))
+        rows = cursor.fetchall()
+        
+        listings = []
+        for row in rows:
+            listings.append({
+                "ItemID": row[0],
+                "ItemName": row[1],
+                "Description": row[2],
+                "Image": row[3],
+                "Url": row[4],
+                "Quantity": row[5],
+                "Price": row[6],
+                "Gender": row[7]
+            })
+            
+        cursor.close()
+
+        return jsonify({
+            'listings': listings,
+            'message': f'Found {len(listings)} listings for {item_name}'
+        })
+    
+    except sqlite3.Error as error:
+        return jsonify({
+            'error': f'Database error: {str(error)}',
+            'listings': []
+        }), 500
+    except Exception as e:
+        return jsonify({
+            'error': f'Server error: {str(e)}',
+            'listings': []
+        }), 500
+
+@app.route('/seller/remove-product', methods=['POST'])
+@login_required
+@seller_required
+def remove_product():
+
+    try:
+        item_id = request.json.get("ItemID")
+
+        if not item_id:
+            return jsonify({"error": "ItemID is required"}), 400
+        
+        result = inventory.RemoveProduct(item_id)
+        
+        if result == "successful":
+            return jsonify({"message": "Product removed successfully"}), 200
+        else:
+            return jsonify({"error": result}), 500
+
+    except Exception as e:
+        logging.error(f"Error removing product: {str(e)}")
+        return jsonify({"error": "Server error while removing product"}), 500
+
+
+@app.route('/seller/update-stock', methods=['POST'])
+@login_required
+@seller_required
+def update_stock():
+    
+    try:
+        item_id = request.json.get("ItemID")
+        quantity = request.json.get("Quantity")
+        add_or_remove = request.json.get("AddOrRemove")  # True for adding stock, False for removing stock
+        
+        if not item_id or quantity is None or add_or_remove is None:
+            return jsonify({"error": "ItemID, Quantity, and AddOrRemove are required"}), 400
+        
+        result = inventory.UpdateStockQuantity(item_id, quantity, add_or_remove)
+        
+        if result == "successful":
+            return jsonify({"message": "Stock quantity updated successfully"}), 200
+        else:
+            return jsonify({"error": result}), 500
+
+    except Exception as e:
+        logging.error(f"Error updating stock: {str(e)}")
+        return jsonify({"error": "Server error while updating stock"}), 500
+
 
 @app.route('/wishlist', methods=['GET'])
 @login_required

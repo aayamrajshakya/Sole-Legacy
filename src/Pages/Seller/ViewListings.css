@@ -1,0 +1,263 @@
+.view-listings-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.search-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.search-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.search-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.search-input-group input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-input-group button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-input-group button:hover {
+    background-color: #0056b3;
+}
+
+.search-input-group button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.listing-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+}
+
+.listing-image {
+    height: 250px;
+    overflow: hidden;
+}
+
+.listing-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.listing-details {
+    padding: 1.5rem;
+}
+
+.listing-details h3 {
+    margin: 0 0 0.5rem;
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.listing-details .description {
+    color: #777;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.listing-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.price {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.quantity {
+    color: #666;
+}
+
+.gender {
+    background: #f8f9fa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.info-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .view-listings-container {
+        padding: 1rem;
+    }
+    
+    .search-input-group {
+        flex-direction: column;
+    }
+    
+    .listings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stock-controls {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.quantity-update {
+    margin-bottom: 1rem;
+}
+
+.quantity-update input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.quantity-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.quantity-buttons button {
+    flex: 1;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-buttons button:hover {
+    background-color: #0056b3;
+}
+
+.quantity-buttons button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.remove-button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+    background-color: #c82333;
+}
+
+.remove-button:disabled {
+    background-color: #e9a9af;
+    cursor: not-allowed;
+}
+
+.listing-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .quantity-buttons {
+        flex-direction: column;
+    }
+    
+    .quantity-buttons button {
+        width: 100%;
+    }
+}

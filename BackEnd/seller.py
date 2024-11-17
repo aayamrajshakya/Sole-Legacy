@@ -1,5 +1,6 @@
 import sqlite3
-from typing import List
+import sys
+from typing import List, Dict, Optional, Union
 from product import Product
 from inventory import Inventory
 from user import User
@@ -9,41 +10,52 @@ class Seller(User):
     def __init__(self):
         super().__init__()
         self.inventory = Inventory()
-        self.cursor = self.inventory.cursor  # Use inventory's cursor for DB operations
-
-    def createSellerAccount(self):
-        self.CreateAccount()
+        self.connection = sqlite3.connect("StoreDatabase.db")
+        self.cursor = self.connection.cursor()
+    
+    def viewListings(self, ItemName: str):
 
         try:
-            self.cursor.execute("INSERT INTO SellerAccounts (SellerID, Email, Password, StoreName) VALUES (?, ?, ?, ?)",
-                                (self.UserID, self.Email, self.Password, self.StoreName))
-            self.inventory.connection.commit()
-        except sqlite3.Error as e:
-            print(f"ERROR: An error occurred while inserting into SellerAccounts database: {e}")
+            self.cursor.execute("SELECT * FROM Inventory WHERE ItemName=?", (ItemName,))
+            rows = self.cursor.fetchall()
 
-    def addProduct(self, brand: str, name: str, stock_quantity: int, color: str, shoe_size: str, price: str) -> None:
-        self.inventory.AddProduct(brand, name, stock_quantity, color, shoe_size, price)
+            listings = []
+            for row in rows:
+                listings.append({
+                    "ItemID": row[0],
+                    "ItemName": row[1],
+                    "Description": row[2],
+                    "Image": row[3],
+                    "Quantity": row[4],
+                    "Price": row[5],
+                    "Gender": row[6]
+                })
+            return listings
+        
+        except sqlite3.Error as error:
+            return f"Error: {error}"
 
-    def viewListings(self, brand: str) -> List[str]:
+    def AddProduct(self, ItemName: str, Description: str, Image: str, Url: str, Quantity: int, Price: str, Gender: str):
         try:
-            self.inventory.cursor.execute("SELECT * FROM Inventory WHERE Brand=?", (brand,))
-            listings = self.inventory.cursor.fetchall()
+            self.inventory.AddProduct(ItemName, Description, Image, Url, Quantity, Price, Gender)
+            return "successful"
+        except sqlite3.Error as error:
+            return f"Error: {error}"
 
-            if not listings:
-                return []  # Return an empty list if no listings are found
-            else:
-                for listing in listings:
-                    print(f"ID: {listing[0]}, Brand: {listing[1]}, ItemName: {listing[2]}, Quantity: {listing[3]}, Size: {listing[4]}, Price: ${listing[2]}")
-                return listings  # Return the listings
-        except sqlite3.Error as e:
-            print(f"ERROR: An error occurred while fetching listings: {e}")
-            return []  # Return an empty list on error
-
-
-    def updateListings(self, ItemID: str, Quantity: int, AddOrRemove: bool) -> None:
-        self.inventory.UpdateStockQuantity(ItemID, Quantity, AddOrRemove)
-
-    def __del__(self):
-        self.connection.commit()
-        self.cursor.close()
-        self.connection.close()
+    def RemoveProduct(self, ItemID: str):
+        try:
+            self.inventory.RemoveProduct(ItemID)
+            return "successful"
+        except sqlite3.Error as error:
+            return f"Error: {error}"
+        
+    def UpdateStockQuantity(self, ItemID: str, Quantity: int, AddOrRemove: bool):
+        try:
+            self.inventory.UpdateStockQuantity(ItemID, Quantity, AddOrRemove)
+            return "successful"
+        except sqlite3.Error as error:
+            return f"Error: {error}"
+        
+    # def __del__(self):
+    #     self.connection.close()
+    #     self.cursor.close()

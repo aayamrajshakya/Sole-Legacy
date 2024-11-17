@@ -44,23 +44,32 @@ export const Wishlist = () => {
         const response = await axios.post('http://localhost:5000/removeFromWishlist', {ItemName: itemName}, {
             withCredentials: true
         });
+        fetchWishlist();
         alert(response.data.message);
         } catch (error) {
           alert(error.response?.data?.error || "Flask server offline");
         }
         }
         
-  
+  if (!isLoggedIn) {
+    return (
+      <div className="cart_page">
+        <h3>This page is inaccessible!</h3>
+        <h4>Please log in and come back.</h4>
+        <Link to="/login"><button className="wishlistOG_btn">Log in <img src={login_icon} alt="Login" /></button></Link>
+      </div>
+    );
+  }
+
   return (
     <div className="wishlist_page">
-      {isLoggedIn ? (
-        <>
-          <h3>Wishlist</h3>
+          <h2>Wishlist</h2>
           {wishlistItems.length === 0 ? (<p>Your wishlist is empty</p>) : (
             <div className="wishlist_main_container">
               {wishlistItems.map((item) => (
                 <div key={item.ItemID}  className="wishlist_view">
                   <img className="item_image" src={`${process.env.PUBLIC_URL}/${item.Gender}/${item.Slug}`} />
+                  <div className = "item_content">
                   <p className="item_name"><b>{item.ItemName}</b></p>
                   <div className="item_details">
                   <p className="item_gender"><b>Gender:</b> {item.Gender}</p>  
@@ -70,17 +79,9 @@ export const Wishlist = () => {
                   <button onClick={() => removeFromWishlist(item.ItemName)} className="delete_btn"><img src={remove_icon}/></button>
                 </div>
                 </div>
+                </div>
               ))}
             </div>
-          )}
-        </>  
-      ) : (
-        <>
-          <h3>This page is inaccessible!</h3>
-          <h4>Please log in and come back.</h4>
-          <Link to="/login"><button className="action_btn" role="button">Log in <img src={login_icon} alt="Login" /></button></Link>
-        </>
-      )}
-    </div>
-  );
-};
+          )}      
+  </div>
+  )};

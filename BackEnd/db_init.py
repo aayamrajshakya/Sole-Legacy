@@ -17,7 +17,7 @@ def initialize_database():
                           Url TEXT NOT NULL,
                           Quantity INTEGER NOT NULL,
                           Price FLOAT NOT NULL,
-                          Gender TEXT NOT NULL,
+                          Gender TEXT NOT NULL
                           )""",
 
             "UserAccounts": """CREATE TABLE IF NOT EXISTS UserAccounts (
@@ -67,7 +67,18 @@ def initialize_database():
                          Gender VARCHAR(10) NOT NULL,
                          Slug TEXT NOT NULL,                
                          FOREIGN KEY (AccountID) REFERENCES UserAccounts(AccountID)
-                         )"""
+                         )""",
+
+            "Cart": """CREATE TABLE IF NOT EXISTS Cart (
+                          AccountID INTEGER NOT NULL,
+                          ItemID INTEGER NOT NULL,
+                          ItemName VARCHAR(80) NOT NULL,
+                          Description TEXT NOT NULL,
+                          Image TEXT NOT NULL,
+                          Quantity INTEGER NOT NULL,
+                          Price FLOAT NOT NULL,
+                          Gender VARCHAR(2) NOT NULL
+                          )"""
         }
 
         # iterative function to create tables

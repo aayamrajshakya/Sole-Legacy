@@ -14,6 +14,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Dashboard } from './Pages/Authentication/Dashboard';
 import { PageNotFound } from './Components/PageNotFound/PageNotFound';
 import { Search } from './Pages/Search/Search';
+import SellerAddProduct from './Pages/Seller/SelllerAddProduct';
+import ViewListings from './Pages/Seller/ViewListings';
+import Order from './Pages/Order/Order';
+import Checkout from './Pages/Order/Checkout';
 
 function App() {
   return (
@@ -31,6 +35,10 @@ function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/seller' element={<SellerAddProduct/>} />
+        <Route path='/seller-listings' element={<ViewListings/>} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/orders" element={<Order />} />
         <Route path='/search' element={<Search/>}/>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
