@@ -82,11 +82,12 @@ def login():
     # calling the login function from user.py
     res = user.loginAccount(email, plain_password)
 
-    if res == "successful":
+    if res[0] == "successful":
         session['email'] = email
-        return jsonify({"message": "Successfully logged in"}), 200
+        session['usetype'] = res[1]
+        return jsonify({"message": "Successfully logged in", "regUserType": res[1]}), 200
     else:
-        return jsonify({"error": res}), 401
+        return jsonify({"error": res[0]}), 401
 
 
 @app.route('/register', methods=['POST'])

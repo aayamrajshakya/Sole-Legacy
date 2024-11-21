@@ -32,20 +32,21 @@ class User:
         except sqlite3.Error as error:
             return f"Error: {error}"
     
-    def loginAccount(self, email: str, plain_password: str) -> str:
+    def loginAccount(self, email: str, plain_password: str) -> tuple:
         self.cursor.execute("SELECT * FROM UserAccounts WHERE Email=?", (email,))
         result = self.cursor.fetchone()
 
         if result is None:
-            return "Email address not found"
+            return ("Email address not found", None)
             
         hashed_password = result[3]
         if bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8')):
             self.loggedIn = True
             self.loggedAccountID = result[0]
-            return "successful"
+            usertype = result[5]
+            return ("successful", usertype)
         else:
-            return "Login credentials don't match"
+            return ("Login credentials don't match", None)
 
     def logoutAccount(self):
         if not self.loggedIn:
