@@ -63,7 +63,7 @@ export const Wishlist = () => {
 
   return (
     <div className="wishlist_page">
-          <h2>Wishlist</h2>
+          <h3>Wishlist</h3>
           {wishlistItems.length === 0 ? (<p>Your wishlist is empty</p>) : (
             <div className="wishlist_main_container">
               {wishlistItems.map((item) => (

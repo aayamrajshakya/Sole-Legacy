@@ -220,24 +220,29 @@ def get_cart_items():
 @login_required
 def process_checkout():
     try:
-        payment_method = request.json.get('paymentMethod')
-        if not payment_method:
-            return jsonify({"error": "Payment method is required"}), 400
-            
-        # Process payment
-        payment_result = order.processPayment(payment_method)
+        # Extract credit card details from the request body
+        card_number = request.json.get('cardNumber')
+        expiry_date = request.json.get('expiryDate')
+        cvv = request.json.get('cvv')
+
+        if not card_number or not expiry_date or not cvv:
+            return jsonify({"error": "All credit card details are required"}), 400
+
+        # Process the credit card payment here (e.g., using an external service like Stripe, etc.)
+        payment_result = order.processPayment(card_number, expiry_date, cvv)
         if payment_result != "Payment processed successfully":
             return jsonify({"error": payment_result}), 400
-            
-        # Complete checkout
+
+        # Complete the checkout
         result = order.checkout(g.accountID)
         if isinstance(result, dict) and "orderID" in result:
             return jsonify(result), 200
         else:
             return jsonify({"error": result}), 400
-            
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 @app.route('/order/<int:order_id>', methods=['GET'])
 @login_required

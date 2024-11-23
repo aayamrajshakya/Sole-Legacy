@@ -124,7 +124,7 @@ const ViewListings = () => {
     return (
         <div className="view-listings-container">
             <div className="search-section">
-                <h2>View Product Listings</h2>
+                <h3>View Product Listings</h3>
                 <form onSubmit={handleSearch} className="search-form">
                     <div className="search-input-group">
                         <input

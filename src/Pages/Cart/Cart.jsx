@@ -79,7 +79,7 @@ export const Cart = () => {
 
   return (
     <div className="cart_page">
-      <h2>Shopping Cart</h2>
+      <h3>Shopping Cart</h3>
       
       {cartItems.length === 0 ? (
         <div className="empty_cart">

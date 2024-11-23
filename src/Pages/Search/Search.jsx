@@ -27,29 +27,36 @@ export const Search = () => {
         }
     };
 
-  return (
-    <div className='search_page'>
-        <h3>Search</h3>
-        <form onSubmit={handleSearch}>
-        <label htmlFor="search_item"></label>
-        <input className="search_box" placeholder='Search an item' type="text" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} required/>
-        <button type="submit" className='search_btn'><img src = {search_icon} /></button>
-    </form>
-            {resultItems.length === 0 ? (<p>No matching item found</p>) : (
-                <div className="search_main_container">
+    return (
+        <div className="view_search_container">
+            <div className="search_page">
+                <h3>Search</h3>
+                <form onSubmit={handleSearch} className="search_form">
+                    <div className="search_input">
+                        <input className="search_box" type="text" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} placeholder="Search an item" required />
+                        <button type="submit" className='search_btn'><img src = {search_icon} /></button>
+                    </div>
+                </form>
+            </div>
+
+            {resultItems.length > 0 && (
+                <div className="search_grid">
                     {resultItems.map((item) => (
-                        <div key={item.ItemID} className="search_view">
-                            <img className="item_image" src={`${process.env.PUBLIC_URL}/${item.Gender}/${item.Image}`} />
-                            <p className="item_name"><b>{item.ItemName}</b></p>
-                            <div className="item_details">
-                            <p className="item_gender"><b>Gender:</b> {item.Gender}</p>  
-                            <p className="item_price"><b>Price:</b> ${item.Price}</p>
-                        </div>
-                        <Link to={`/${item.Gender}/${item.Url}`}><p className='viewText'>View product</p></Link>
+                        <div key={item.ItemID} className="search_card">
+                            <div className="search_image">
+                                <img src={`${process.env.PUBLIC_URL}/${item.Gender}/${item.Image}`} alt={item.ItemName} />
+                            </div>
+                            <div className="search_details">
+                                <h3>{item.ItemName}</h3>
+                                <div className="search_meta">
+                                    <span className="item_price">${item.Price}</span>
+                                    <span className="item_gender">{item.Gender}</span>
+                                </div>
+                                <Link to={`/${item.Gender}/${item.Url}`}><p className='item_link'>View product</p></Link>
+                            </div>
                         </div>
                     ))}
                 </div>
             )}
         </div>
-    );
-};
+    )};

@@ -57,10 +57,10 @@ export const Register = () => {
                 <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </label>
               <label>
-                <input id="password" name="password" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" placeholder="Password" value={plain_password} onChange={(e) => setPassword(e.target.value)} required />
+              <input id="password" name="password" type="password" placeholder="Password" value={plain_password} onChange={(e) => setPassword(e.target.value)} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$'  title="Password should 8-12 characters long, containing at least one lowercase letter, one uppercase letter, one digit, and one special character"/>
               </label>
               <label>
-                <input id="password_two" name="password_two" type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" placeholder="Confirm Password" value={plain_confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+              <input id="password_two" name="password_two" type="password" placeholder="Confirm Password" value={plain_confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
               </label>
               <div className="role_selection">
                 <label className="radio-inline">

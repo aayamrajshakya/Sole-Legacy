@@ -8,10 +8,14 @@ class Order:
         self.databaseName = "StoreDatabase.db"
         self.inventory = Inventory()
 
-    def processPayment(self, paymentMethod: str):
-        valid_payment_methods = ["CreditCard", "PayPal", "DebitCard", "ApplePay", "GooglePay"]
-        if paymentMethod not in valid_payment_methods:
-            return "Invalid payment method"
+    def processPayment(self, card_number: str, expiry_date: str, cvv: str):
+        if len(card_number) != 16 or not card_number.isdigit():
+            return "Invalid card number"
+        if len(expiry_date) != 5 or not expiry_date[2] == '/' or not expiry_date.replace('/', '').isdigit():
+            return "Invalid expiry date"
+        if len(cvv) != 3 or not cvv.isdigit():
+            return "Invalid CVV"
+
         return "Payment processed successfully"
 
     def getOrderDetails(self, orderID: int):
