@@ -73,10 +73,17 @@ def test_wishlist_3(client):
             "ItemName": "Shoe name"
       })
 
-      jsonResponse = removeResponse.get_json()
-      assert jsonResponse["message"] == "Successfully deleted Shoe name from wishlist!"
+      jsonResponse2 = removeResponse.get_json()
+      assert jsonResponse2["message"] == "Successfully deleted Shoe name from wishlist!"
 
       # verifying that the wishlist is empty after removing the item
       wishlistResponse = client.get('/wishlist')
-      jsonResponse = wishlistResponse.get_json()
-      assert jsonResponse["message"] == "Wishlist is empty"
+      jsonResponse3 = wishlistResponse.get_json()
+      assert jsonResponse3["message"] == "Wishlist is empty"
+
+
+######################################################################
+# The user trying to remove items that weren't even in the wishlist  #
+# is senseless, but this can be done via curl. This possibility has  #
+# been ruled out though                                              #
+######################################################################

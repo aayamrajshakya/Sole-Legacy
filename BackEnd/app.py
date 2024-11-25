@@ -529,7 +529,7 @@ def search_items():
             cursor.execute("SELECT ItemID, ItemName, Image, Url, Price, Gender FROM Inventory WHERE ItemName LIKE ?", ('%' + searchKeyword + '%',))
             searchedItems = cursor.fetchall()
             if not searchedItems:
-                return jsonify({"message": "No such item"}), 200
+                return jsonify({"error": "No such item"}), 200
             items = []
             for indivItem in searchedItems:
                     ItemID, ItemName, Image, Url, Price, Gender = indivItem

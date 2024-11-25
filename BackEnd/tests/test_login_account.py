@@ -2,8 +2,8 @@
 
 def registration_helper(client):
     return client.post('/register', json={
-        "fullName": "Aayam Raj Shakya",
-        "email": "aayam@msu.edu",
+        "fullName": "Jane Doe",
+        "email": "janedoe@msu.edu",
         "plain_password": "Mississippi123!",
         "address": "Starkville",
         "usertype": "Admin"
@@ -11,7 +11,7 @@ def registration_helper(client):
 
 def login_helper(client):
         return client.post('/login', json={
-              "email": "aayam@msu.edu",
+              "email": "janedoe@msu.edu",
               "plain_password": "Mississippi123!"
         })
 
@@ -30,7 +30,7 @@ def test_login_1(client):
 def test_login_2(client):
     registration_helper(client)
     loginResponse = client.post('/login', json={
-        "email": "aayam@msu.edu",
+        "email": "janedoe@msu.edu",
         "plain_password": "wrongpassword",
     })
     jsonResponse = loginResponse.get_json()
@@ -38,6 +38,6 @@ def test_login_2(client):
     assert jsonResponse["error"] == "Login credentials don't match"
 
 
-#############################################################
-# Wrong user-type scenario is handled by flask-react        #                              
-#############################################################
+#######################################################
+# Wrong user-type scenario is handled by flask-react  #                              
+#######################################################

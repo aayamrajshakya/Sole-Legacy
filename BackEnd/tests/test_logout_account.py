@@ -2,8 +2,8 @@
 
 def registration_helper(client):
     return client.post('/register', json={
-        "fullName": "Aayam Raj Shakya",
-        "email": "aayam@msu.edu",
+        "fullName": "Josh Doe",
+        "email": "joshdoe@msu.edu",
         "plain_password": "Mississippi123!",
         "address": "Starkville",
         "usertype": "Admin"
@@ -11,7 +11,7 @@ def registration_helper(client):
 
 def login_helper(client):
         return client.post('/login', json={
-              "email": "aayam@msu.edu",
+              "email": "joshdoe@msu.edu",
               "plain_password": "Mississippi123!"
         })
 
