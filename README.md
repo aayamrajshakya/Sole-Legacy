@@ -11,16 +11,17 @@ Assuming you already have pip, npm, and other top-lvl dependencies installed on 
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
+- [Team Members](#team-members)
 - [Technologies Used](#technologies-used)
 
 ## Overview
 ### Description
-Sole Legacy is an e-commerce website designed as part of Intro to Software Engineering (CSE 4214) class. The project aims to create a user-friendly online shoe store that combines Nike's high-quality standards with Temu's competitive pricing. The goal is to provide a seamless shopping experience for sneaker enthusiasts by offering a range of stylish and affordable shoes. 
+Sole Legacy is an e-commerce website designed as part of our Intro to Software Engineering (CSE 4214) class. The project aims to create a user-friendly online shoe store that combines Nike's high-quality standards with Temu's competitive pricing. Our goal is to provide a seamless shopping experience for sneaker enthusiasts by offering a range of stylish and affordable shoes. 
 
 ### Objective
-The final product will be fully functional, featuring product browsing, an item wishlist, a shopping cart, checkout, and user account management to ensure a smooth shopping experience.
+Our final product will be fully functional, featuring product browsing, an item wishlist, a shopping cart, checkout, and user account management to ensure a smooth shopping experience.
 
-[Live website](https://solelegacy.vercel.app/)
+[Documentation](https://kmm1316.github.io/Group7E-Commerce/)  | [Live website](https://solelegacy.vercel.app/)
 
 ## Features
 
@@ -31,6 +32,15 @@ The final product will be fully functional, featuring product browsing, an item 
 - **Shopping Cart:** Add products to a cart, view the cart, and make necessary changes.
 - **Checkout Process:** Enjoy an easy checkout experience with an order confirmation message.
 
+## Team Members
+
+| Name                | netID   | GitHub                                                                                  |
+|---------------------|---------|-----------------------------------------------------------------------------------------|
+| Kevin McDonald       | kmm1316 | [![GitHub](https://skillicons.dev/icons?i=github)](https://github.com/kmm1316)         |
+| Charles Virden       | chv25   | [![GitHub](https://skillicons.dev/icons?i=github)](https://github.com/charliespants)   |
+| Aayam Raj Shakya     | as5160  | [![GitHub](https://skillicons.dev/icons?i=github)](https://github.com/aayamrajshakya)  |
+
+
 ## Technologies Used
 
-**Backend:** Python, Django, SQLite  |  **Frontend:** React.js
+**Backend:** Python, Flask, SQLite  |  **Frontend:** React.js
