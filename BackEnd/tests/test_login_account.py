@@ -1,43 +1,41 @@
-## Scenario 1: Successful login
+# Helper functions to shorten the codebase
 
-def test_login_1(client):
-    client.post('/register', json={
-        "fullName": "Demo Account",
-        "email": "demo@demo.edu",
-        "plain_password": "Demo123!",
+def registration_helper(client):
+    return client.post('/register', json={
+        "fullName": "Aayam Raj Shakya",
+        "email": "aayam@msu.edu",
+        "plain_password": "Mississippi123!",
         "address": "Starkville",
         "usertype": "Admin"
     })
 
-    loginResponse = client.post('/login', json={
-        "email": "demo@demo.edu",
-        "plain_password": "Demo123!",
-    })
-    jsonResponse = loginResponse.get_json()
+def login_helper(client):
+        return client.post('/login', json={
+              "email": "aayam@msu.edu",
+              "plain_password": "Mississippi123!"
+        })
 
+## Scenario 1: Successful login
+
+def test_login_1(client):
+    registration_helper(client)
+    loginResponse = login_helper(client)
+    jsonResponse = loginResponse.get_json()
     assert loginResponse.status_code == 200
-    assert "Successfully logged in" in jsonResponse["message"]
+    assert jsonResponse["message"] == "Successfully logged in"
 
 
 ## Scenario 2: Wrong password
 
 def test_login_2(client):
-    client.post('/register', json={
-        "fullName": "Demo Account",
-        "email": "demo@demo.edu",
-        "plain_password": "Demo123!",
-        "address": "Starkville",
-        "usertype": "Admin"
-    })
-
+    registration_helper(client)
     loginResponse = client.post('/login', json={
-        "email": "demo@demo.edu",
+        "email": "aayam@msu.edu",
         "plain_password": "wrongpassword",
     })
     jsonResponse = loginResponse.get_json()
-
     assert loginResponse.status_code == 401
-    assert "error" in jsonResponse
+    assert jsonResponse["error"] == "Login credentials don't match"
 
 
 #############################################################
