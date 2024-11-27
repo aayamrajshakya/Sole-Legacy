@@ -2,7 +2,7 @@ import React from 'react'
 import "./Homepage.css";
 import { HomepageShowcase } from '../HomepageShowcase/HomepageShowcase'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import banner from '../../Components/Assets/general/banner.png'
+import banner from '../../Components/Assets/general/banner.jpg'
 
 export const Homepage = () => {
   return (
