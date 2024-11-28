@@ -12,6 +12,12 @@ import { Wishlist } from './Pages/Wishlist/Wishlist';
 import { IndivShoe } from './Pages/IndivShoe/IndivShoe';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Dashboard } from './Pages/Authentication/Dashboard';
+import { Admin } from './Pages/Admin/Admin'
+import { UserDirectory } from './Pages/Admin/UserDirectory';
+import { AdminAdd } from "./Pages/Admin/AdminAdd";
+import { RemoveItem } from "./Pages/Admin/RemoveItem";
+import { UpdateQuantity } from "./Pages/Admin/UpdateQuantity";
+import { UpdateAccount } from "./Pages/Admin/UpdateAccount";
 import { PageNotFound } from './Components/PageNotFound/PageNotFound';
 import { Search } from './Pages/Search/Search';
 import SellerAddProduct from './Pages/Seller/SelllerAddProduct';
@@ -36,6 +42,12 @@ function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/wishlist' element={<Wishlist/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/admin' element={<Admin/>}/>
+        <Route path='/admin_view' element={<UserDirectory/>}/>
+        <Route path='/admin_add' element={<AdminAdd/>}/>
+        <Route path='/admin_remove' element={<RemoveItem/>}/>
+        <Route path='/update_quantity' element={<UpdateQuantity/>}/>
+        <Route path='/update_form' element={<UpdateAccount/>}/>
         <Route path='/seller' element={<Seller />} />
         <Route path='/seller-add-product' element={<SellerAddProduct/>} />
         <Route path='/seller-listings' element={<ViewListings/>} />

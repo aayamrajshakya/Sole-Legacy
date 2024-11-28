@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Display list of users</title>
+        <link rel='stylesheet' href='../static/table.css'>
+        <h1 class='head'>User Directory</h1>
+    </head>
+    <body>
+        <div class='User_container'>
+            <table>
+                <caption>All existing Users</caption>
+                <thead>
+                    <th scope='col'>AccountID</th>
+                    <th scope="col">Name</th>
+                    <th scope='col'>Email</th>
+                    <th scope='col'>Address</th>
+                    <th scope='col'>UserType</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for j in content %}
+                            <tr>
+                            {% for x in j %}
+                                <td scope='row'>{{j[x]}}</td>
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

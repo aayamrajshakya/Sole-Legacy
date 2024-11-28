@@ -1,25 +1,39 @@
 # Much help from: https://flask.palletsprojects.com/en/stable/patterns/viewdecorators/
 
-from flask import Flask, request, jsonify, session, g
+from flask import Flask, request, jsonify, session, g, render_template
 from flask_cors import CORS
+import bcrypt
 from user import User
 from seller import Seller
+from admin import Admin
 from inventory import Inventory
 from cart import Cart
 from order import Order
 from functools import wraps
 import sqlite3
+import sys
 import logging
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../src/templates', static_folder='../src/static')
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
 app.secret_key = 'canputanythinghere'
 user = User()
 seller = Seller()
+admin = Admin()
 inventory = Inventory()
 cart = Cart()
 order = Order()
+
+
+try:
+    connection = sqlite3.connect('StoreDatabase.db', check_same_thread=False)
+    cursor = connection.cursor()
+
+except sqlite3.Error as e:
+    print(f'Error: {e}')
+    sys.exit()
+
 
 
 def login_required(f):
@@ -84,7 +98,7 @@ def login():
 
     if res[0] == "successful":
         session['email'] = email
-        session['usetype'] = res[1]
+        session['usertype'] = res[1]
         return jsonify({"message": "Successfully logged in", "regUserType": res[1]}), 200
     else:
         return jsonify({"error": res[0]}), 401
@@ -538,6 +552,112 @@ def search_items():
         except:
              return jsonify({"error": "Search failed"}), 500
         
+        
+@app.route('/update_form', methods=['POST', 'GET'])
+def update_account():
+    try:
+        if request.method == 'POST':
+            if request.form.get('FullName'):
+                user.updateAccount('FullName', request.form.get('FullName'))
+            elif request.form.get('Email'):
+                user.updateAccount('Email', request.form.get('Email'))
+            elif request.form.get('Address'):
+                user.updateAccount('Address', request.form.get('Address'))
+            elif request.form.get('Password'):
+                bvalue = request.form.get('Password').encode('utf-8')
+                temp_hash = bcrypt.hashpw(bvalue, bcrypt.gensalt())
+                hashed_password = temp_hash.decode('utf-8')
+                user.updateAccount('Password', hashed_password)
+            return jsonify({'message': "successful"}), 200
+
+        if request.method == 'GET':
+            return render_template('update_account_form.html')
+
+    except:
+        return jsonify({'message': 'failed to change info'}), 500
+
+@app.route('/admin_view', methods=['GET'])
+def viewAccounts():
+    try:
+        content = Admin().viewUserAccounts()
+        return render_template('user_directory.html', user_type=session.get('usertype'), content=content)
+    except:
+        return jsonify({"error": "failed to view"}), 500
+
+
+@app.route('/admin_add', methods=['GET', 'POST'])
+def admin_addProduct():
+    try:
+        if request.method == 'POST':
+            ItemName = request.form.get('ItemName')
+            Quantity = int(request.form.get('Quantity'))
+            Price = request.form.get('Price')
+            Gender = request.form.get('Gender')
+            Admin().addProduct(ItemName, Description='', Image='', Url='', Quantity=Quantity, Price=Price, Gender=Gender)
+            return jsonify({'message': 'success'}), 200
+    except TypeError:
+        return jsonify({'message': 'Invalid Data'}), 500
+    except:
+        return jsonify({'message': 'Failed to POST'}), 500
+
+
+@app.route('/admin_remove', methods=['POST', 'GET'])
+def admin_removeProduct():
+    try:
+        if request.method == 'GET':
+            cursor.execute("SELECT ItemID, ItemName, Quantity, Price, Gender FROM Inventory")
+            Items = []
+            rows = cursor.fetchall()
+            for row in rows:
+                Items.append({
+                    'ItemID': row[0],
+                    'ItemName': row[1],
+                    'Quantity': row[2],
+                    'Price': row[3],
+                    'Gender': row[4]
+                })
+            return render_template('item_directory.html', user_type=session.get('usertype'), content=Items)
+        elif request.method == 'POST':
+            Admin().removeProduct(request.form.get('ItemId'))
+            return jsonify({'message': 'Success'}), 200
+    except:
+        return jsonify({'message': 'Failed'}), 409
+
+
+@app.route('/update_quantity', methods=['POST', 'GET'])
+def admin_updateStockQuantity():
+    try:
+        cursor.execute("SELECT ItemID, ItemName, Quantity, Price, Gender FROM Inventory")
+        Items = []
+        rows = cursor.fetchall()
+        for row in rows:
+            Items.append({
+                'ItemID': row[0],
+                'ItemName': row[1],
+                'Quantity': row[2],
+                'Price': row[3],
+                'Gender': row[4]
+            })
+        if request.method == 'GET':
+            return render_template('item_directory.html', user_type=session.get('usertype'), content=Items)
+
+        elif request.method == 'POST':
+            ItemID = request.form.get('ItemId')
+            Quantity = int(request.form.get('Quantity'))
+
+            if request.form.get('option') == 'Add':
+                AddRemove = True
+            else:
+                AddRemove = False
+
+            reply = request.form.get('option')
+            res = Admin().updateStockQuantity(ItemID, Quantity, AddRemove)
+            if res == 'successful':
+                return jsonify({'message': f'successfully {reply}ed'}), 200
+            else:
+                return jsonify({'message': f'failed to {reply}'}), 409
+    except:
+        return jsonify({'message': 'failed to render'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

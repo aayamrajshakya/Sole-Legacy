@@ -88,7 +88,8 @@ export const Dashboard = () => {
               <td>{data.UserRole || "N/A"}</td>
             </tr>
         </table>
-        {data.UserRole === "Seller" && (<Link to="/seller"><button className="dashboard_btn">Seller Dashboard</button></Link>)}
+        {data.UserRole === "Seller" && (<Link to="/seller"><button className="dashboard_btn">Admin Dashboard</button></Link>)}
+        {data.UserRole === "Admin" && (<Link to="/admin"><button className="dashboard_btn">Seller Dashboard</button></Link>)}
         <Link to="/orders"><button className="dashboard_btn">Order history <img src={history_icon} /></button></Link>
         <button class="dashboard_btn" role="button" onClick={handleLogout}>Log out <img src={logout_icon} /></button>
         <button class="dashboard_btn" role="button" onClick={handleDelete}>Delete <img src={delete_icon} /></button>

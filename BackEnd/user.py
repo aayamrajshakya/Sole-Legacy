@@ -57,8 +57,8 @@ class User:
     
     def updateAccount(self, parameter: str, newVal: str) -> str:
         # only logged-in user can update info
-        if not self.loggedIn:
-            return "must log in"
+        # if not self.loggedIn:
+        #     return "must log in"
         try:
             self.cursor.execute(f"UPDATE UserAccounts SET {parameter}=? WHERE AccountID=?", (newVal, self.loggedAccountID))
             self.connection.commit()

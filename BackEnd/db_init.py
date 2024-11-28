@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 def initialize_database():
     try:
@@ -84,8 +85,6 @@ def initialize_database():
         for table, query in tables.items():
             cursor.execute(query)
 
-        connection.commit()
-
     except sqlite3.Error as error:
         print(f"ERROR: {error}")
 
@@ -95,3 +94,6 @@ def initialize_database():
 
 if __name__ == "__main__":
     initialize_database()
+
+
+#  FOREIGN KEY (ItemID) REFERENCES Inventory(ItemID),

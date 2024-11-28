@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Display list of users</title>
+        <link rel='stylesheet' href='../static/table.css'>
+        <h1 class='head'>Item Directory {% if user_type == 'Admin' %} and removal form {% endif %}</h1>
+    </head>
+    <body>
+        <div class='User_container'>
+            <table>
+                <caption>All existing Items</caption>
+                <thead>
+                    <th scope='col'>Item ID: </th>
+                    <th scope='col'>Item Name:</th>
+                    <th scope='col'>Quantity: </th>
+                    <th scope='col'>Price: </th>
+                    <th scope='col'>Gender: </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for j in content %}
+                            <tr>
+                            {% for x in j %}
+                                <td scope='row'>{{j[x]}}</td>
+                            {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <style>
+            form {
+                align-content: center;
+                width: 400px;
+                margin-top: 100px;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                position: absolute;
+                left: 28.5%;
+            }
+
+            .addremove {
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            fieldset{
+                margin-bottom: 10px;
+            }
+
+            input[type=checkbox]{
+                display: inline-block;
+            }
+
+            input[type="submit"] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .form_caption {
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-left: 30px;
+            }
+        </style>
+    {% if user_type == 'Admin' %}
+        <div class='form'>
+            <form action='#' method='POST'>
+                <caption class='form_caption'>Pleas you would like to remove:</caption>
+                <br><br>
+                <label for='itemid-input'>Item ID:</label>
+                <input type='text' id='itemid-input' name='ItemID' required>
+                <input type='submit' value='Submit'>
+            </form>
+        </div>
+    {% endif %}
+    {% if user_type == 'Admin' or 'Seller' %}
+        {% if path == '/update_quantity' %}
+            <div class='form'>
+                <form action='#' method='POST'>
+                    <caption class='form_caption'>Please enter the item you would like to remove:</caption>
+                    <br><br>
+                    <label for='ItemId_input'>Item ID: </label>
+                    <input type='text' id='ItemId_input' name='ItemID' required>
+                    <label for='quantity_input'>Quantity: </label>
+                    <input type='number' id='quantity_input' name='Quantity' min=1 max=10 required>
+                    <label for='add' class='addremove'>Add</label>
+                    <input type='radio' id='add' name='option' value='Add' required>
+                    <label for=remove class=addremove>Remove</label>
+                    <input type='radio' id='remove' name='option' value='Remove' required><br>
+                    <input type='submit' value='Submit'>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
+    </body>
+</html>

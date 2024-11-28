@@ -1,3 +1,10 @@
 node_modules/
 __pycache__/
 .pyc
+env/
+venv/
+.env
+.log
+.tmp
+.idea/
+.pytest_cache/
