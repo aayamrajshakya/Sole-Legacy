@@ -93,3 +93,9 @@ label, select, option{
 select{
     margin-right: 25px;
 }
+
+.dropdown_menus {
+    align-items:last baseline;
+    display: flex;
+    gap: 10px;
+}
