@@ -27,7 +27,7 @@ export const IndivShoe = () => {
         } catch (error) {
             alert(error.response?.data?.error || "Flask server offline");
         }
-};
+    };
 
     const handleAddToCart = async () => {
         try {
@@ -45,7 +45,7 @@ export const IndivShoe = () => {
                 alert(error.response?.data?.error || "Failed to add item to cart");
             }
         }
-};
+    };
 
     useEffect(() => {
         const fetchShoeData = async () => {
@@ -67,12 +67,12 @@ export const IndivShoe = () => {
         <div className="main_div">
             <div className="indivShoePage">
                 <div className="indivShoe_img">
-                <img src={`${process.env.PUBLIC_URL}/${shoe.Gender}/${shoe.Image}`} />
+                    <img src={`${process.env.PUBLIC_URL}/${shoe.Gender}/${shoe.Image}`} />
                 </div>
                 <div className="indivShoe_info">
                     <h3>{shoe.ItemName}
-                    <div className="special_offer">{shoe.ItemName==="Nike Air Jordan 1" ? "Old price: $179" : ""}<div className="price">${shoe.Price} </div>
-                    </div>  
+                        <div className="special_offer">{shoe.ItemName === "Nike Air Jordan 1" ? "Old price: $179" : ""}<div className="price">${shoe.Price} </div>
+                        </div>
                     </h3>
                     <h3>Description <div className="description">{shoe.Description}</div></h3>
                     <div className="dropdown_menus">
@@ -89,11 +89,11 @@ export const IndivShoe = () => {
 
                         <label for="shoeColor">Color: </label>
                         <select name="color" id="color" value={shoeColor} onChange={(e) => setShoeColor(e.target.value)}>
-                        <option value="White">White</option>
-                        <option value="Yellow">Yellow</option> 
-                        <option value="Green">Green</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Grey">Grey</option>
+                            <option value="White">White</option>
+                            <option value="Yellow">Yellow</option>
+                            <option value="Green">Green</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Grey">Grey</option>
                         </select>
                     </div>
 

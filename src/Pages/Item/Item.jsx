@@ -5,7 +5,7 @@ export const Item = ({ image, name, price, gender }) => {
   return (
     <div className="item">
       <div className="image">
-      <img src={`${process.env.PUBLIC_URL}/${gender}/${image}`} />
+        <img src={`${process.env.PUBLIC_URL}/${gender}/${image}`} />
       </div>
       <p className="item-name">{name}</p>
       <p className="item-price">${price}</p>

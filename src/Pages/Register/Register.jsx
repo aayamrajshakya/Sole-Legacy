@@ -19,27 +19,27 @@ export const Register = () => {
   // explanation: https://stackoverflow.com/questions/50320055/react-handlesubmit-with-axios-post-with-e-preventdefault-still-refreshes
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (plain_password !== plain_confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-  
+
     const data = { fullName, email, plain_password, address, usertype };
-  
+
     try {
       const response = await axios.post('http://localhost:5000/register', data, {
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
       });
       alert(response.data.message);
       navigate("/login");  // user will be taken to login page once successfully registered
-  } catch (error) {
-    alert(error.response?.data?.error || "Flask server offline");
-  }
-};
+    } catch (error) {
+      alert(error.response?.data?.error || "Flask server offline");
+    }
+  };
 
   return (
     <div className="page_header">
@@ -57,10 +57,10 @@ export const Register = () => {
                 <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </label>
               <label>
-              <input id="password" name="password" type="password" placeholder="Password" value={plain_password} onChange={(e) => setPassword(e.target.value)} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$'  title="Password should 8-12 characters long, containing at least one lowercase letter, one uppercase letter, one digit, and one special character"/>
+                <input id="password" name="password" type="password" placeholder="Password" value={plain_password} onChange={(e) => setPassword(e.target.value)} pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$' title="Password should 8-12 characters long, containing at least one lowercase letter, one uppercase letter, one digit, and one special character" />
               </label>
               <label>
-              <input id="password_two" name="password_two" type="password" placeholder="Confirm Password" value={plain_confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                <input id="password_two" name="password_two" type="password" placeholder="Confirm Password" value={plain_confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
               </label>
               <div className="role_selection">
                 <label className="radio-inline">

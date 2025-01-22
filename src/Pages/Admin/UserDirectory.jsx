@@ -17,7 +17,7 @@ export const UserDirectory = () => {
 
     fetchData();
   }, []);
-  
+
 
   return (
     <div>

@@ -23,16 +23,16 @@ export const Login = () => {
       });
       const regUserType = response.data.regUserType;
 
-      if (regUserType !== userType){
+      if (regUserType !== userType) {
         alert("Wrong user type!");
         return;
       }
 
       alert(response.data.message);
-      if (regUserType==="Buyer"){navigate("/");}
-      else if (regUserType==="Seller"){navigate("/seller");}
-      else if(regUserType==="Admin"){navigate("/admin");}
-      else {navigate("/");}
+      if (regUserType === "Buyer") { navigate("/"); }
+      else if (regUserType === "Seller") { navigate("/seller"); }
+      else if (regUserType === "Admin") { navigate("/admin"); }
+      else { navigate("/"); }
     } catch (error) {
       alert(error.response?.data?.error || "Flask server offline");
     }
@@ -54,17 +54,17 @@ export const Login = () => {
                 <input type="password" placeholder="Password" value={plain_password} onChange={(e) => setPassword(e.target.value)} required />
               </label>
               <div>
-              <div className="role_selection">
-              <label className="radio-inline">
-              <input type="radio" name="optradio" value="Buyer" checked={userType === 'Buyer'} onChange={(e) => setUserType(e.target.value)} /> Buyer
-              </label>
-              <label className="radio-inline">
-              <input type="radio" name="optradio" value="Seller" checked={userType === 'Seller'} onChange={(e) => setUserType(e.target.value)} /> Seller
-              </label>
-              <label className="radio-inline">
-              <input type="radio" name="optradio" value="Admin" checked={userType === 'Admin'} onChange={(e) => setUserType(e.target.value)} /> Admin
-              </label>
-              </div>
+                <div className="role_selection">
+                  <label className="radio-inline">
+                    <input type="radio" name="optradio" value="Buyer" checked={userType === 'Buyer'} onChange={(e) => setUserType(e.target.value)} /> Buyer
+                  </label>
+                  <label className="radio-inline">
+                    <input type="radio" name="optradio" value="Seller" checked={userType === 'Seller'} onChange={(e) => setUserType(e.target.value)} /> Seller
+                  </label>
+                  <label className="radio-inline">
+                    <input type="radio" name="optradio" value="Admin" checked={userType === 'Admin'} onChange={(e) => setUserType(e.target.value)} /> Admin
+                  </label>
+                </div>
                 <button className="signIn" type="submit">Sign In</button>
               </div>
             </form>
