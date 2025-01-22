@@ -16,7 +16,7 @@ const Order = () => {
         credentials: 'include',
       });
       const data = await response.json();
-      
+
       if (response.ok) {
         setOrders(data.orders);
       } else {
@@ -33,7 +33,7 @@ const Order = () => {
         credentials: 'include',
       });
       const data = await response.json();
-      
+
       if (response.ok) {
         setSelectedOrder(data);
       } else {
@@ -47,9 +47,9 @@ const Order = () => {
   return (
     <div className="orders-container">
       <h2 className="orders-title">Your Orders</h2>
-      
+
       {error && <div className="error-message">{error}</div>}
-      
+
       <div className="orders-grid">
         {orders.map((order) => (
           <div key={order.orderID} className="order-card">
@@ -59,18 +59,18 @@ const Order = () => {
                 {new Date(order.orderDate).toLocaleDateString()}
               </span>
             </div>
-            
+
             <div className="order-info">
               <p>Total Amount: ${order.totalAmount.toFixed(2)}</p>
             </div>
-            
-            <button 
+
+            <button
               className="view-details-button"
               onClick={() => fetchOrderDetails(order.orderID)}
             >
               View Details
             </button>
-            
+
             {selectedOrder && selectedOrder.orderID === order.orderID && (
               <div className="order-details">
                 <h4>Order Items:</h4>

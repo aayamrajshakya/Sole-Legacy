@@ -23,10 +23,10 @@ export const Admin = () => {
           Remove Item
         </button>
         <button className="dashboard-button" onClick={() => handleNavigate('/update_form')}>
-            Update Account
+          Update Account
         </button>
         <button className="dashboard-button" onClick={() => handleNavigate('/update_quantity')}>
-           Edit Item Quantity
+          Edit Item Quantity
         </button>
       </div>
     </div>

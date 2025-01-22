@@ -26,7 +26,7 @@ export const Women = () => {
       <div className="men-catalog">
         {womenShoes.map((shoe) => (
           <Link to={`/women/${shoe.Url}`} key={shoe.ItemID}>
-            <Item id={shoe.ItemID} name={shoe.ItemName} image={shoe.Image} price={shoe.Price} gender={shoe.Gender}/>
+            <Item id={shoe.ItemID} name={shoe.ItemName} image={shoe.Image} price={shoe.Price} gender={shoe.Gender} />
           </Link>
         ))}
       </div>

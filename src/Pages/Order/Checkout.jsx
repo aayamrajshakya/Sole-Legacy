@@ -35,9 +35,9 @@ const Checkout = () => {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({ 
-          cardNumber, 
-          expiryDate, 
+        body: JSON.stringify({
+          cardNumber,
+          expiryDate,
           cvv
         }),
       });
@@ -58,7 +58,7 @@ const Checkout = () => {
   return (
     <div className="checkout-container">
       <h2 className="checkout-title">Checkout</h2>
-      
+
       {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
 

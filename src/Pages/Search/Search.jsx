@@ -14,7 +14,7 @@ export const Search = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/search', {searchKeyword}, {
+            const response = await axios.post('http://localhost:5000/search', { searchKeyword }, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -34,7 +34,7 @@ export const Search = () => {
                 <form onSubmit={handleSearch} className="search_form">
                     <div className="search_input">
                         <input className="search_box" type="text" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} placeholder="Search an item" required />
-                        <button type="submit" className='search_btn'><img src = {search_icon} /></button>
+                        <button type="submit" className='search_btn'><img src={search_icon} /></button>
                     </div>
                 </form>
             </div>
@@ -59,4 +59,5 @@ export const Search = () => {
                 </div>
             )}
         </div>
-    )};
+    )
+};

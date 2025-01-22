@@ -63,8 +63,8 @@ const ViewListings = () => {
                     if (item.ItemID === itemId) {
                         return {
                             ...item,
-                            Quantity: addOrRemove ? 
-                                item.Quantity + parseInt(quantity) : 
+                            Quantity: addOrRemove ?
+                                item.Quantity + parseInt(quantity) :
                                 item.Quantity - parseInt(quantity)
                         };
                     }
@@ -116,8 +116,8 @@ const ViewListings = () => {
     };
 
     const formatPrice = (price) => {
-        return typeof price === 'number' 
-            ? `$${price.toFixed(2)}` 
+        return typeof price === 'number'
+            ? `$${price.toFixed(2)}`
             : price;
     };
 

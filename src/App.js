@@ -30,32 +30,32 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path='/' element={<Homepage/>}/>
-        <Route path='/women' element={<Women/>}/>
-        <Route path='/women/:url' element={<IndivShoe/>}/>
-        <Route path='/men' element={<Men/>}/>
-        <Route path='/men/:url' element={<IndivShoe/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route path='/wishlist' element={<Wishlist/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/admin' element={<Admin/>}/>
-        <Route path='/admin_view' element={<UserDirectory/>}/>
-        <Route path='/admin_add' element={<AdminAdd/>}/>
-        <Route path='/admin_remove' element={<RemoveItem/>}/>
-        <Route path='/update_quantity' element={<UpdateQuantity/>}/>
-        <Route path='/update_form' element={<UpdateAccount/>}/>
-        <Route path='/seller' element={<Seller />} />
-        <Route path='/seller-add-product' element={<SellerAddProduct/>} />
-        <Route path='/seller-listings' element={<ViewListings/>} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/orders" element={<Order />} />
-        <Route path='/search' element={<Search/>}/>
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+        <NavBar />
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/women' element={<Women />} />
+          <Route path='/women/:url' element={<IndivShoe />} />
+          <Route path='/men' element={<Men />} />
+          <Route path='/men/:url' element={<IndivShoe />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/wishlist' element={<Wishlist />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/admin' element={<Admin />} />
+          <Route path='/admin_view' element={<UserDirectory />} />
+          <Route path='/admin_add' element={<AdminAdd />} />
+          <Route path='/admin_remove' element={<RemoveItem />} />
+          <Route path='/update_quantity' element={<UpdateQuantity />} />
+          <Route path='/update_form' element={<UpdateAccount />} />
+          <Route path='/seller' element={<Seller />} />
+          <Route path='/seller-add-product' element={<SellerAddProduct />} />
+          <Route path='/seller-listings' element={<ViewListings />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/orders" element={<Order />} />
+          <Route path='/search' element={<Search />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </BrowserRouter>
       <Footer />
     </div>

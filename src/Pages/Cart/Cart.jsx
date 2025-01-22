@@ -10,7 +10,7 @@ export const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [error, setError] = useState(null);
-  
+
 
   useEffect(() => {
     checkLoginStatus();
@@ -61,7 +61,7 @@ export const Cart = () => {
       }, {
         withCredentials: true
       });
-      fetchCartItems(); 
+      fetchCartItems();
     } catch (error) {
       setError(error.response?.data?.error || "Failed to remove item");
     }
@@ -80,7 +80,7 @@ export const Cart = () => {
   return (
     <div className="cart_page">
       <h3>Shopping Cart</h3>
-      
+
       {cartItems.length === 0 ? (
         <div className="empty_cart">
           <p>Your cart is empty</p>
@@ -94,7 +94,7 @@ export const Cart = () => {
             {cartItems.map((item) => (
               <div key={item.itemId} className="cart_item">
                 <div className="cart_item_image">
-                  <Item 
+                  <Item
                     id={item.itemId}
                     name={item.name}
                     image={item.image}
@@ -105,7 +105,7 @@ export const Cart = () => {
 
                 <div className="cart_item_actions">
                   <div className="quantity_control">
-                    <button 
+                    <button
                       className="quantity_button"
                       onClick={() => updateQuantity(item.itemId, item.quantity - 1)}
                       disabled={item.quantity <= 1}
@@ -113,15 +113,15 @@ export const Cart = () => {
                       -
                     </button>
                     <span>{item.quantity}</span>
-                    <button 
+                    <button
                       className="quantity_button"
                       onClick={() => updateQuantity(item.itemId, item.quantity + 1)}
                     >
                       +
                     </button>
                   </div>
-                  
-                  <button 
+
+                  <button
                     className="action_btn"
                     onClick={() => removeItem(item.itemId)}
                   >
